@@ -1,0 +1,21 @@
+{
+  "skillset_version": "v1-genesis-2026-06-15",
+  "status": "DRAFT, genesis run from a single SOP. Routing not yet meaningful with one project.",
+  "projects": [
+    { "id": "P1", "name": "entity-reference-verification", "task_type": "Decide whether a yellow-boxed target region and a green-boxed reference show the same real-world entity, pick one of six verdicts, and write a feature-named reason.", "stimulus_source": "real_asset (identity hinges on fine perceptual detail, generated images are not trustworthy ground truth)" }
+  ],
+  "skills": [
+    { "id": "S1",  "name": "Instruction Reading",          "description": "Read the entity type and label first and load the identity criteria that apply to that type before judging the images.", "weights": { "entity-reference-verification": 5 } },
+    { "id": "S2",  "name": "Attention to Detail",          "description": "Notice the small construction or marking detail, a strap width, a logo position, a jersey number, a chest marking, that decides identity.", "weights": { "entity-reference-verification": 5 } },
+    { "id": "S3",  "name": "Calibrated Judgment",          "description": "Choose definitely only when the deciding feature is clearly visible, drop to likely under doubt, and skip a genuine coin flip rather than guess.", "weights": { "entity-reference-verification": 5 } },
+    { "id": "S4",  "name": "Objectivity",                  "description": "Judge only on identity signals for the entity type and ignore non-identity content such as outfit, background, lighting, weather, and breed.", "weights": { "entity-reference-verification": 5 } },
+    { "id": "S5",  "name": "Identity Criteria Knowledge",  "description": "Know what establishes identity for each entity type, face for a person, construction for a garment, individual markings for an animal, structure for a location.", "weights": { "entity-reference-verification": 5 } },
+    { "id": "S6",  "name": "Comparison",                   "description": "Weigh the target against the reference feature by feature and decide whether the identity features match or conflict.", "weights": { "entity-reference-verification": 5 } },
+    { "id": "S7",  "name": "Difference Detection",         "description": "Spot the specific feature that conflicts between target and reference, such as a moved logo or a number present in one image and absent in the other.", "weights": { "entity-reference-verification": 5 } },
+    { "id": "S8",  "name": "Visual Quality Assessment",    "description": "Judge whether a deciding feature is clearly visible or too occluded, distant, folded, or low resolution to support a confident call.", "weights": { "entity-reference-verification": 4 } },
+    { "id": "S9",  "name": "Data Integrity Screening",     "description": "Recognize a broken input that must be flagged rather than verified, such as the same image on both sides, a watermark, a wrong box, or a same-photoshoot pair.", "weights": { "entity-reference-verification": 4 } },
+    { "id": "S10", "name": "Clear Writing",                "description": "Write a short reason that names the specific identity features used, so a reviewer can audit the decision from the features alone.", "weights": { "entity-reference-verification": 5 } }
+  ],
+  "generalist_backbone": { "skills": ["S2", "S3", "S4"], "min_floor_0_100": 60 },
+  "routing_signals": {}
+}
