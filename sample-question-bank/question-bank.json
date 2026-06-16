@@ -1,0 +1,925 @@
+{
+  "provenance": {
+    "skillset_version": 2,
+    "target_project": { "id": "P1", "name": "entity-reference-verification" },
+    "count_setting": "25",
+    "type": "Objective",
+    "house_style": "No em dashes, no semicolons, no emojis, no markdown links, no casual filler, plain text only.",
+    "arrangement": "mixed",
+    "pool_factor": 1,
+    "allocation_formula": "largest-remainder over the entity-reference-verification weight column with a representation floor of 2 for weight 4 to 5 and 1 for weight 1 to 3, computed over the objective-assessable skills after S7 was reduced out under the Objective type",
+    "blueprint_table": [
+      { "skill_id": "S1", "skill_name": "Instruction Reading", "project_weight": 4, "target_quota": 3.70, "floor": 2, "allocated": 4, "deciding_count": 4, "trap_count": 0, "cognitive_level": "analyze" },
+      { "skill_id": "S2", "skill_name": "Attention to Detail", "project_weight": 5, "target_quota": 4.63, "floor": 2, "allocated": 5, "deciding_count": 5, "trap_count": 1, "cognitive_level": "analyze" },
+      { "skill_id": "S3", "skill_name": "Difference Detection", "project_weight": 5, "target_quota": 4.63, "floor": 2, "allocated": 5, "deciding_count": 5, "trap_count": 1, "cognitive_level": "analyze" },
+      { "skill_id": "S4", "skill_name": "Objectivity", "project_weight": 5, "target_quota": 4.63, "floor": 2, "allocated": 4, "deciding_count": 4, "trap_count": 1, "cognitive_level": "evaluate" },
+      { "skill_id": "S5", "skill_name": "Calibrated Judgment", "project_weight": 5, "target_quota": 4.63, "floor": 2, "allocated": 4, "deciding_count": 4, "trap_count": 0, "cognitive_level": "evaluate" },
+      { "skill_id": "S6", "skill_name": "Source Validity Judgment", "project_weight": 3, "target_quota": 2.78, "floor": 1, "allocated": 3, "deciding_count": 2, "trap_count": 0, "cognitive_level": "evaluate" }
+    ],
+    "validity_rationale": "Content validity is the primary warrant and is fixed a priori by the blueprint, which maps items to the entity-reference-verification weight column so the construct domain is covered in proportion to job criticality. Construct validity is carried by the claim then evidence then task chain, every in-scope and objective-assessable skill is sampled, every weight four or five skill is sampled across more than one item, and a boundary-driven evidence-exclusion list keeps each item deciding on one construct so a low score is attributable to the right skill. Criterion and predictive validity is marked OPEN, no criterion is collected in this pipeline and the deliberate use of generic scenarios in place of the real production task lowers the fidelity that would otherwise drive prediction, so the predictive coefficient remains a hypothesis for a downstream criterion study and is never a property this generator confers.",
+    "cut_score_philosophy": "Criterion-referenced. The bank states standard-setting inputs only, a provisional minimally-competent estimate per item and a stated pass target, and applies no cutoff. The downstream scorer owns the arithmetic and the platform owns every cutoff.",
+    "performance_construct": "maximal",
+    "typical_performance_gap": "The will-do facet, sustained diligence and consistency across a long production batch, is only partly observable in a short maximal-performance bank and is named here as an out-of-instrument limitation.",
+    "realized_type_mix": "25 objective fields and 0 subjective fields."
+  },
+  "question_bank": [
+    {
+      "item_id": "1",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker isolates the small deciding feature past the salient decoy and selects it. Provisional and non-load-bearing.",
+      "prompt": "A single shipping label is shown. Decide which statement about the label is correct based only on what the label displays.",
+      "media": [
+        { "media_id": "q1-stimulus", "url": "", "placeholder": "A printed shipping label. The recipient block reads ASHTON RIVERA, 4127 MAPLE COURT. A large bold service banner across the top reads PRIORITY OVERNIGHT in red and is the most prominent element. The tracking number is printed in small grey type as 7741 2290 0163. In the lower right a small box holds a single printed character, the letter B, which marks the sort zone.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "label_feature",
+          "name": "Correct statement about the label",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The lower-right sort-zone box contains the letter B.",
+            "The lower-right sort-zone box contains the letter D.",
+            "The label displays no sort-zone box at all."
+          ],
+          "answer": "The lower-right sort-zone box contains the letter B.",
+          "reason": "The placeholder states the small lower-right sort-zone box contains the single letter B. The bold red PRIORITY OVERNIGHT banner is a salient decoy that does not bear on the sort zone, and reading B as the similar letter D or overlooking the small box are the attention failures the distractors capture.",
+          "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "2",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker scans both observations and names the single conflicting field. Provisional and non-load-bearing.",
+      "prompt": "Two delivery manifests for the same route are shown side by side. Identify the one specific discrepancy between them.",
+      "media": [
+        { "media_id": "q2-stimulus", "url": "", "placeholder": "Two manifests labeled Copy A and Copy B, each listing four stops. Copy A stop order is 1 Birch Depot, 2 Halden Plant, 3 Corso Mall, 4 Vale Clinic. Copy B stop order is 1 Birch Depot, 2 Halden Plant, 3 Corso Mall, 4 Vale Clinic. The total parcel count reads 58 on Copy A and 58 on Copy B. The driver code reads DRV-204 on Copy A and DRV-240 on Copy B.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "discrepancy",
+          "name": "The single discrepancy between the manifests",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The two manifests differ in their driver code.",
+            "The two manifests differ in their total parcel count.",
+            "The two manifests differ in their stop order."
+          ],
+          "answer": "The two manifests differ in their driver code.",
+          "reason": "Every field matches across the two manifests except the driver code, DRV-204 on Copy A against DRV-240 on Copy B. The parcel count reads 58 on both and the stop orders are identical, so the transposed driver code is the only conflict.",
+          "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "3",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S1", "name": "Instruction Reading" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker parses the instruction and lists every condition with none added or dropped. Provisional and non-load-bearing.",
+      "prompt": "Read the following coupon rule, then identify which list correctly captures every separate condition a purchase must satisfy to qualify. Rule: The coupon applies to a single order placed in store, only on a weekday, only when the order subtotal is at least forty dollars before tax, and only when the order contains no clearance items. Choose the option that lists the distinct conditions without adding or dropping any.",
+      "media": [],
+      "fields": [
+        {
+          "field_key": "condition_set",
+          "name": "The complete set of stated conditions",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "Placed in store, placed on a weekday, subtotal at least forty dollars before tax, and contains no clearance items.",
+            "Placed in store, placed on a weekday, and subtotal at least forty dollars before tax.",
+            "Placed in store, subtotal at least forty dollars before tax, contains no clearance items, and free shipping included."
+          ],
+          "answer": "Placed in store, placed on a weekday, subtotal at least forty dollars before tax, and contains no clearance items.",
+          "reason": "The rule states four distinct conditions, in store, weekday, subtotal at least forty dollars before tax, and no clearance items. The second option drops the no-clearance condition and the third omits the weekday condition while inventing a free-shipping term the rule never states.",
+          "skills": [ { "id": "S1", "name": "Instruction Reading" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "high"
+        }
+      ]
+    },
+    {
+      "item_id": "4",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S4", "name": "Objectivity" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker keys on the identifying evidence and ignores category resemblance. Provisional and non-load-bearing.",
+      "prompt": "A reference tool and a candidate tool are shown. Decide whether the candidate is the same individual unit as the reference, using only the evidence that identifies a specific unit.",
+      "media": [
+        { "media_id": "q4-stimulus", "url": "", "placeholder": "The reference is a cordless drill, model TX-9, in yellow housing, with engraved unit serial SN-44817 on its base. The candidate is a cordless drill, also model TX-9, also in yellow housing, with engraved unit serial SN-44871 on its base. Both share the same model, color, and battery type. The engraved unit serial is the only unit-specific identifier, and the two differ, SN-44817 against SN-44871.", "image_status": "pending", "key_confidence": "medium", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "same_unit_verdict",
+          "name": "Same individual unit or not",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The candidate is a different unit, because the unit serials differ.",
+            "The candidate is the same unit, because the model and color match.",
+            "The candidate is the same unit, because both are cordless drills."
+          ],
+          "answer": "The candidate is a different unit, because the unit serials differ.",
+          "reason": "Only the engraved unit serial identifies a specific unit, and the two differ, SN-44817 against SN-44871. Matching model, color, and product category are category-level resemblances that do not identify an individual unit, so resting the verdict on them is the objectivity failure the distractors capture.",
+          "skills": [ { "id": "S4", "name": "Objectivity" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "5",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S5", "name": "Calibrated Judgment" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker selects the defensible confidence band for the stated evidence. Provisional and non-load-bearing.",
+      "prompt": "A worker must decide whether two records describe the same person. The only evidence available is that both records share the surname Okonkwo and both list the city Leeds. No given name, date of birth, identifier, or address is available on either record. Choose the conclusion the available evidence defensibly supports.",
+      "media": [],
+      "fields": [
+        {
+          "field_key": "confidence_band",
+          "name": "The defensible conclusion",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The evidence is insufficient to determine whether the records describe the same person.",
+            "The records confirm the same person, because the surname and city match.",
+            "The records describe different people, because no identifier is shared."
+          ],
+          "answer": "The evidence is insufficient to determine whether the records describe the same person.",
+          "reason": "A shared common surname and city are consistent with many distinct individuals and carry no unique identifier, so the evidence neither confirms nor rules out the same person. Treating the weak partial match as a confirmation, or the absence of a shared identifier as a positive exclusion, both overstate what thin evidence can support.",
+          "skills": [ { "id": "S5", "name": "Calibrated Judgment" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "6",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S6", "name": "Source Validity Judgment" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker judges whether the source can support the intended check. Provisional and non-load-bearing.",
+      "prompt": "A worker is asked to verify a person's date of birth from the document provided. Decide whether the provided document is a fit source for that verification.",
+      "media": [
+        { "media_id": "q6-stimulus", "url": "", "placeholder": "The provided document is a retail purchase receipt. It shows a store name, an itemized list of three grocery products with prices, a subtotal, a tax line, a total of 23 dollars and 14 cents, and a transaction time stamp. The receipt contains no name and no date of birth. It is fully legible and undamaged.", "image_status": "pending", "key_confidence": "medium", "requires_human_key_review": false }
+      ],
+      "fields": [
+        {
+          "field_key": "source_fitness",
+          "name": "Fit source for the verification or not",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The document is unfit for the task, because a purchase receipt does not carry a date of birth.",
+            "The document is fit, and the date of birth can be read from the time stamp.",
+            "The document is fit, but the date of birth is too faint to read."
+          ],
+          "answer": "The document is unfit for the task, because a purchase receipt does not carry a date of birth.",
+          "reason": "A purchase receipt records a transaction and carries no date-of-birth field, so it is structurally unfit for verifying a date of birth regardless of legibility. The transaction time stamp is the sale time and not a birth date, and the receipt is stated to be fully legible, so the defect is the fitness of the source and not difficulty in reading it.",
+          "skills": [ { "id": "S6", "name": "Source Validity Judgment" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "7",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+      "is_trap": true,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional hard, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker isolates the small deciding feature past the salient decoy and selects it. Provisional and non-load-bearing.",
+      "prompt": "A single laboratory sample vial label is shown. Decide which statement about the label is correct based only on what it displays.",
+      "media": [
+        { "media_id": "q7-stimulus", "url": "", "placeholder": "A vial label with a wide bright orange hazard band running across its center, the most prominent element, carrying no text. Above the band the sample name reads SERUM LOT. Below the band, in small black type, the dilution factor is printed as 1 to 100. Beside the dilution factor a small printed batch position reads 7. The number printed beside the dilution factor is the digit 7.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "label_feature",
+          "name": "Correct statement about the label",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The batch position printed beside the dilution factor is 7.",
+            "The orange hazard band states the batch position.",
+            "The batch position printed beside the dilution factor is 1."
+          ],
+          "answer": "The batch position printed beside the dilution factor is 7.",
+          "reason": "The deciding detail is the small batch-position digit printed beside the dilution factor, which is 7. The wide orange hazard band is the most salient element but carries no text, and the 1 in the dilution factor 1 to 100 is not the batch position, so both distractors capture attention failures that follow the salient decoy or grab the wrong small number.",
+          "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "8",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker scans both observations and names the single conflicting field. Provisional and non-load-bearing.",
+      "prompt": "Two seating charts for the same room are shown. Identify the one specific discrepancy between them.",
+      "media": [
+        { "media_id": "q8-stimulus", "url": "", "placeholder": "Two charts labeled Draft 1 and Draft 2, each with three rows of seats. Row A on both is Patel, Nguyen, Olsen. Row B on both is Romano, Singh, Adeyemi. Row C on Draft 1 is Walsh, Costa, Ibarra. Row C on Draft 2 is Walsh, Costa, Ibanez. Every name matches across the two charts except the third seat of row C, Ibarra against Ibanez. Both charts have three rows.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "discrepancy",
+          "name": "The single discrepancy between the charts",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The charts differ at the third seat of row C.",
+            "The charts differ at the first seat of row A.",
+            "The charts differ in the number of rows."
+          ],
+          "answer": "The charts differ at the third seat of row C.",
+          "reason": "Every seat assignment matches across the two charts except the third seat of row C, Ibarra on Draft 1 against Ibanez on Draft 2. Row A seat one is Patel on both and both charts have three rows, so neither distractor names a real difference.",
+          "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "9",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S1", "name": "Instruction Reading" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker parses the instruction and lists every condition with none added or dropped. Provisional and non-load-bearing.",
+      "prompt": "Read the following parking sign, then identify which list correctly captures every separate condition under which parking is permitted. Sign: Parking permitted only with a valid resident permit, only between 6 in the evening and 8 in the morning, and not at any time on street-cleaning days. Choose the option that lists the distinct conditions without adding or dropping any.",
+      "media": [],
+      "fields": [
+        {
+          "field_key": "condition_set",
+          "name": "The complete set of stated conditions",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "A valid resident permit is held, the time is between 6 in the evening and 8 in the morning, and the day is not a street-cleaning day.",
+            "A valid resident permit is held, and the time is between 6 in the evening and 8 in the morning.",
+            "A valid resident permit is held, the time is between 6 in the evening and 8 in the morning, and the vehicle is a passenger car."
+          ],
+          "answer": "A valid resident permit is held, the time is between 6 in the evening and 8 in the morning, and the day is not a street-cleaning day.",
+          "reason": "The sign states three distinct conditions, a valid resident permit, the evening-to-morning time window, and not a street-cleaning day. The second option drops the street-cleaning condition and the third replaces it with a passenger-car condition the sign never states.",
+          "skills": [ { "id": "S1", "name": "Instruction Reading" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "high"
+        }
+      ]
+    },
+    {
+      "item_id": "10",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S4", "name": "Objectivity" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker keys on the identifying evidence and ignores category resemblance. Provisional and non-load-bearing.",
+      "prompt": "A reference dog and a candidate dog are shown. Decide whether the candidate is the same registered individual as the reference, using only the evidence that identifies a specific registered animal.",
+      "media": [
+        { "media_id": "q10-stimulus", "url": "", "placeholder": "The reference is a beagle with a registered ear-tattoo identifier reading 3KJ. The candidate is a beagle with a registered ear-tattoo identifier reading 3KL. Both are beagles of similar size with the same tri-color coat. The registered ear-tattoo identifier is the only individual identifier, and the two differ, 3KJ against 3KL.", "image_status": "pending", "key_confidence": "medium", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "same_individual_verdict",
+          "name": "Same registered individual or not",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The candidate is a different registered individual, because the ear-tattoo identifiers differ.",
+            "The candidate is the same registered individual, because both are tri-color beagles.",
+            "The candidate is the same registered individual, because the coats match."
+          ],
+          "answer": "The candidate is a different registered individual, because the ear-tattoo identifiers differ.",
+          "reason": "The registered ear-tattoo identifier is the only feature that names a specific registered animal, and the two differ, 3KJ against 3KL. Shared breed, size, and coat color are category-level resemblances common to many beagles, so resting the verdict on them is the objectivity failure the distractors capture.",
+          "skills": [ { "id": "S4", "name": "Objectivity" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "11",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S5", "name": "Calibrated Judgment" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker selects the defensible confidence band for the stated evidence. Provisional and non-load-bearing.",
+      "prompt": "A worker must decide whether two product photos show the same individual collectible figurine. Both figurines are the same limited model in the same paint scheme. The only feature that distinguishes individual units is a hand-numbered base, and in the available evidence the base number is recorded for the reference figurine as 042 of 500 but was not recorded for the candidate figurine. Choose the conclusion the available evidence defensibly supports.",
+      "media": [],
+      "fields": [
+        {
+          "field_key": "confidence_band",
+          "name": "The defensible conclusion",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The evidence is insufficient to determine whether the figurines are the same individual unit, because the candidate base number was not recorded.",
+            "The figurines are the same individual unit, because the model and paint scheme match.",
+            "The figurines are different individual units, because only the reference base number is recorded."
+          ],
+          "answer": "The evidence is insufficient to determine whether the figurines are the same individual unit, because the candidate base number was not recorded.",
+          "reason": "The hand-numbered base is the only feature that distinguishes individual units, and the candidate number was not recorded, so the evidence cannot confirm or rule out the same unit. A matching model and paint scheme are shared across the whole limited run and do not identify a unit, and a missing record is not positive evidence of a different unit, so both alternatives overstate the available evidence.",
+          "skills": [ { "id": "S5", "name": "Calibrated Judgment" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "12",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S6", "name": "Source Validity Judgment" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker judges whether the source can support the intended check. Provisional and non-load-bearing.",
+      "prompt": "A worker is asked to read a meter's final reading from the photo provided. Decide whether the provided photo is a fit source for that reading.",
+      "media": [
+        { "media_id": "q12-stimulus", "url": "", "placeholder": "The photo shows an analog utility meter. The entire dial face is obscured by heavy condensation and glare so that none of the digit wheels can be made out. The meter housing and pipe are visible and in frame, but no digit on the reading is resolvable. The placeholder confirms this is the correct meter and not a different meter, but its reading area is unreadable.", "image_status": "pending", "key_confidence": "medium", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "source_fitness",
+          "name": "Fit source for the reading or not",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The photo is unfit for the task, because the reading area is fully obscured and no digit is resolvable.",
+            "The photo is fit, and the final reading is the lowest visible digit.",
+            "The photo is unfit, because it shows a different meter than the one under review."
+          ],
+          "answer": "The photo is unfit for the task, because the reading area is fully obscured and no digit is resolvable.",
+          "reason": "The dial face is entirely obscured by condensation and glare and no digit is resolvable, so the photo cannot support a meter reading and is unfit for the task. No digit is visible to read, and the placeholder states the meter is the correct one and not a different meter, so the defect is the unreadable reading area and not a wrong subject.",
+          "skills": [ { "id": "S6", "name": "Source Validity Judgment" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "13",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker isolates the small deciding feature past the salient decoy and selects it. Provisional and non-load-bearing.",
+      "prompt": "A single event wristband is shown. Decide which statement about the wristband is correct based only on what it displays.",
+      "media": [
+        { "media_id": "q13-stimulus", "url": "", "placeholder": "A fabric event wristband printed with a large festival logo and the word ACCESS in big bold letters as its most prominent feature. Along the lower edge, in small print, the access tier is shown as TIER 2. No other tier marking appears on the band.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "label_feature",
+          "name": "Correct statement about the wristband",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The small lower-edge tier text reads TIER 2.",
+            "The small lower-edge tier text reads TIER 3.",
+            "The wristband shows no tier text at all."
+          ],
+          "answer": "The small lower-edge tier text reads TIER 2.",
+          "reason": "The tier is printed small along the lower edge and reads TIER 2. The large ACCESS lettering and festival logo are salient decoys that do not state the tier, and reading the tier as 3 or missing the small tier text entirely are the attention failures the distractors capture.",
+          "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "14",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+      "is_trap": true,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional hard, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker scans both observations and names the single conflicting field. Provisional and non-load-bearing.",
+      "prompt": "Two ingredient lists for what is claimed to be the same product are shown. Identify the one specific discrepancy between them.",
+      "media": [
+        { "media_id": "q14-stimulus", "url": "", "placeholder": "Two lists labeled Pack X and Pack Y, each with six ingredients in the same order. Pack X reads water, sugar, citric acid, sodium citrate, natural flavor, red 40. Pack Y reads water, sugar, citric acid, sodium benzoate, natural flavor, red 40. Five of the six entries are identical and in the same positions. The fourth entry differs, sodium citrate on Pack X against sodium benzoate on Pack Y. The sixth entry, red 40, is the same on both.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "discrepancy",
+          "name": "The single discrepancy between the lists",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The two lists differ at the fourth entry only.",
+            "The two lists are identical at every entry.",
+            "The two lists differ at the sixth entry only."
+          ],
+          "answer": "The two lists differ at the fourth entry only.",
+          "reason": "Five of the six entries match in content and position and only the fourth differs, sodium citrate on Pack X against sodium benzoate on Pack Y. The heavy overlap lures a reader toward calling the lists identical, and the sixth entry red 40 is the same on both, so the single conflict is the fourth entry.",
+          "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "15",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S1", "name": "Instruction Reading" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker parses the instruction and lists every condition with none added or dropped. Provisional and non-load-bearing.",
+      "prompt": "Read the following contest rule, then identify which list correctly captures every separate condition an entry must satisfy to be valid. Rule: An entry is valid only if it is submitted by a resident of the state, only if the entrant is at least eighteen years old, only if it is received before the closing date, and only if it includes a proof of purchase. Choose the option that lists the distinct conditions without adding or dropping any.",
+      "media": [],
+      "fields": [
+        {
+          "field_key": "condition_set",
+          "name": "The complete set of stated conditions",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "Submitted by a state resident, entrant at least eighteen years old, received before the closing date, and includes a proof of purchase.",
+            "Submitted by a state resident, entrant at least eighteen years old, and received before the closing date.",
+            "Submitted by a state resident, received before the closing date, includes a proof of purchase, and limited to one entry per day."
+          ],
+          "answer": "Submitted by a state resident, entrant at least eighteen years old, received before the closing date, and includes a proof of purchase.",
+          "reason": "The rule states four distinct conditions, state residency, age at least eighteen, received before the closing date, and a proof of purchase. The second option drops the proof-of-purchase condition and the third omits the age condition while inventing a one-entry-per-day limit the rule never states.",
+          "skills": [ { "id": "S1", "name": "Instruction Reading" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "high"
+        }
+      ]
+    },
+    {
+      "item_id": "16",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S4", "name": "Objectivity" } ],
+      "is_trap": true,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional hard, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker keys on the identifying evidence and ignores surface resemblance. Provisional and non-load-bearing.",
+      "prompt": "A reference storefront and a candidate storefront are shown. Decide whether the candidate is the same specific location as the reference, using only the evidence that identifies a specific location.",
+      "media": [
+        { "media_id": "q16-stimulus", "url": "", "placeholder": "The reference storefront shows a coffee chain sign in the chain distinctive green script, with the street address 88 Harlow Street on the door. The candidate storefront shows the same coffee chain sign in the same green script, with the street address 88 Harlowe Street on the door. The chain branding is identical between the two. The door addresses differ, 88 Harlow Street against 88 Harlowe Street.", "image_status": "pending", "key_confidence": "medium", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "same_location_verdict",
+          "name": "Same specific location or not",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The candidate is a different location, because the door addresses differ.",
+            "The candidate is the same location, because the chain branding is identical.",
+            "The candidate is the same location, because both signs use the green script."
+          ],
+          "answer": "The candidate is a different location, because the door addresses differ.",
+          "reason": "Only the door address identifies a specific location, and the two differ, 88 Harlow Street against 88 Harlowe Street. The identical green-script branding is shared by every branch of the chain and is the surface resemblance that lures a same-location verdict, so resting on it rather than on the address is the objectivity failure.",
+          "skills": [ { "id": "S4", "name": "Objectivity" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "17",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S5", "name": "Calibrated Judgment" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker selects the defensible confidence band for the stated evidence. Provisional and non-load-bearing.",
+      "prompt": "A worker must decide whether two shipment records refer to the same shipment. Both records list the same tracking number 1Z-9920-4471, the same origin depot, the same weight, and the same dispatch date, and the tracking number is agreed to be globally unique. Choose the conclusion the available evidence defensibly supports.",
+      "media": [],
+      "fields": [
+        {
+          "field_key": "confidence_band",
+          "name": "The defensible conclusion",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The records refer to the same shipment, because the unique tracking number matches along with every other field.",
+            "The evidence is insufficient to determine whether the records refer to the same shipment.",
+            "The records refer to different shipments, because two separate records exist."
+          ],
+          "answer": "The records refer to the same shipment, because the unique tracking number matches along with every other field.",
+          "reason": "A globally unique tracking number matches across both records, and origin, weight, and dispatch date all agree, so the evidence defensibly confirms one shipment. Calling this insufficient ignores the matching unique identifier, and the mere existence of two records is not evidence of two shipments.",
+          "skills": [ { "id": "S5", "name": "Calibrated Judgment" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "18",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S6", "name": "Source Validity Judgment" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker judges whether the source can support the intended check. Provisional and non-load-bearing.",
+      "prompt": "A worker is asked to verify the wing markings of a specific aircraft whose tail number is the registered subject. Decide whether the provided photo is a fit source for that verification.",
+      "media": [
+        { "media_id": "q18-stimulus", "url": "", "placeholder": "The task names the subject as the aircraft with tail number G-7714, described as a twin-engine propeller plane. The provided photo is sharp, well lit, and fully legible. It shows a single-engine jet whose painted tail number reads G-1147. The aircraft in the photo is plainly not the subject, it carries a different tail number and a different airframe type.", "image_status": "pending", "key_confidence": "medium", "requires_human_key_review": false }
+      ],
+      "fields": [
+        {
+          "field_key": "source_fitness",
+          "name": "Fit source for the verification or not",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The photo is unfit for the task, because it shows a different aircraft than the subject.",
+            "The photo is fit, and the wing markings can be verified from it.",
+            "The photo is unfit, because it is too blurred to read the tail number."
+          ],
+          "answer": "The photo is unfit for the task, because it shows a different aircraft than the subject.",
+          "reason": "The photo is fully legible but shows an aircraft with tail number G-1147 and a single-engine jet airframe, not the subject G-7714 twin-engine propeller plane, so it cannot verify the subject markings. The image is stated to be sharp and legible, so the defect is the wrong subject and not blur, and a wrong-subject source cannot verify the subject.",
+          "skills": [ { "id": "S6", "name": "Source Validity Judgment" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "19",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker isolates the small deciding feature past the salient decoy and selects it. Provisional and non-load-bearing.",
+      "prompt": "A single mounted electronic component is shown. Decide which statement about the component is correct based only on what is visible.",
+      "media": [
+        { "media_id": "q19-stimulus", "url": "", "placeholder": "A square integrated-circuit chip soldered to a green board. A large white silkscreen label beside the chip reads U7 in bold and is the most prominent nearby text. On the chip body itself, one corner carries a small printed dot marking pin one. The small pin-one dot is at the top-left corner of the chip body.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "label_feature",
+          "name": "Correct statement about the component",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The chip pin-one dot is at the top-left corner of its body.",
+            "The chip pin-one dot is at the bottom-right corner of its body.",
+            "The chip body carries no pin-one dot at all."
+          ],
+          "answer": "The chip pin-one dot is at the top-left corner of its body.",
+          "reason": "A small printed dot on the chip body marks pin one and sits at the top-left corner. The bold U7 silkscreen label is a salient decoy that does not indicate pin one, and placing the dot at the opposite corner or missing it entirely are the attention failures the distractors capture.",
+          "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "20",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker scans both observations and names the single conflicting field. Provisional and non-load-bearing.",
+      "prompt": "Two copies of a building floor plan are shown. Identify the one specific discrepancy between them.",
+      "media": [
+        { "media_id": "q20-stimulus", "url": "", "placeholder": "Two floor plans labeled Issue 1 and Issue 2, each labeling four rooms. Both label them Lobby, Server Room, Break Room, Records. The room areas on both read 220, 95, 140, and 60 square feet. The door swing on the Records room is drawn inward on Issue 1 and outward on Issue 2. Every label and area matches, and only the Records door swing direction differs, inward against outward.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "discrepancy",
+          "name": "The single discrepancy between the plans",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The plans differ in the door swing direction of the Records room.",
+            "The plans differ in the labeled area of the Break Room.",
+            "The plans differ in the name of the second room."
+          ],
+          "answer": "The plans differ in the door swing direction of the Records room.",
+          "reason": "Every room label and printed area matches across the two plans, and the only conflict is the Records room door swing, drawn inward on Issue 1 and outward on Issue 2. The Break Room area reads 140 on both and the second room is Server Room on both, so neither distractor names a real difference.",
+          "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "21",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S1", "name": "Instruction Reading" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker parses the instruction and lists every condition with none added or dropped. Provisional and non-load-bearing.",
+      "prompt": "Read the following loan policy, then identify which list correctly captures every separate condition under which an item may be borrowed. Policy: An item may be borrowed only by a member in good standing, only if the member has fewer than ten items currently out, and only if the item is not marked reference-only. Choose the option that lists the distinct conditions without adding or dropping any.",
+      "media": [],
+      "fields": [
+        {
+          "field_key": "condition_set",
+          "name": "The complete set of stated conditions",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The borrower is a member in good standing, the member has fewer than ten items currently out, and the item is not marked reference-only.",
+            "The borrower is a member in good standing, and the item is not marked reference-only.",
+            "The borrower is a member in good standing, the member has fewer than ten items currently out, and the item is returned within fourteen days."
+          ],
+          "answer": "The borrower is a member in good standing, the member has fewer than ten items currently out, and the item is not marked reference-only.",
+          "reason": "The policy states three distinct conditions, membership in good standing, fewer than ten items currently out, and the item not marked reference-only. The second option drops the fewer-than-ten condition and the third replaces the reference-only condition with a fourteen-day return term the policy never states for borrowing.",
+          "skills": [ { "id": "S1", "name": "Instruction Reading" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "high"
+        }
+      ]
+    },
+    {
+      "item_id": "22",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S4", "name": "Objectivity" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker keys on the identifying evidence and ignores surface resemblance. Provisional and non-load-bearing.",
+      "prompt": "A reference painting and a candidate painting are shown. Decide whether the candidate is the same individual work as the reference, using only the evidence that identifies a specific work.",
+      "media": [
+        { "media_id": "q22-stimulus", "url": "", "placeholder": "The reference is a small landscape in a loose impressionist style, with the inventory mark INV-3120 on its back label. The candidate is a small landscape in the same loose impressionist style, with the inventory mark INV-3210 on its back label. Both share the impressionist style and a similar palette. The back-label inventory mark is the only work-specific identifier, and the two differ, INV-3120 against INV-3210.", "image_status": "pending", "key_confidence": "medium", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "same_work_verdict",
+          "name": "Same individual work or not",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The candidate is a different work, because the back-label inventory marks differ.",
+            "The candidate is the same work, because both share the impressionist style.",
+            "The candidate is the same work, because the palettes are similar."
+          ],
+          "answer": "The candidate is a different work, because the back-label inventory marks differ.",
+          "reason": "Only the back-label inventory mark identifies a specific work, and the two differ, INV-3120 against INV-3210. Shared impressionist style and a similar palette are surface resemblances common to many works, so resting the verdict on them rather than on the inventory mark is the objectivity failure the distractors capture.",
+          "skills": [ { "id": "S4", "name": "Objectivity" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "23",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S5", "name": "Calibrated Judgment" } ],
+      "is_trap": false,
+      "cognitive_level": "evaluate",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker selects the defensible confidence band for the stated evidence. Provisional and non-load-bearing.",
+      "prompt": "A worker must decide whether two badge records describe the same employee. Both records share the department Logistics, but the agreed unique identifier, the employee number, is present on both and differs, reading EMP-5567 on one record and EMP-8841 on the other. No other fields are available. Choose the conclusion the available evidence defensibly supports.",
+      "media": [],
+      "fields": [
+        {
+          "field_key": "confidence_band",
+          "name": "The defensible conclusion",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The records describe different employees, because the unique employee numbers differ.",
+            "The records describe the same employee, because the department matches.",
+            "The evidence is insufficient to determine whether the records describe the same employee."
+          ],
+          "answer": "The records describe different employees, because the unique employee numbers differ.",
+          "reason": "The employee number is the agreed unique identifier and it is present on both records and differs, EMP-5567 against EMP-8841, which defensibly rules out the same employee. A shared department is common to many employees and does not establish identity, and a conflict in a present unique identifier is decisive rather than insufficient.",
+          "skills": [ { "id": "S5", "name": "Calibrated Judgment" } ],
+          "requires_human_key_review": false,
+          "key_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "item_id": "24",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker isolates the small deciding feature past the salient decoy and selects it. Provisional and non-load-bearing.",
+      "prompt": "A single medication blister-pack backing is shown. Decide which statement about the backing is correct based only on what it displays.",
+      "media": [
+        { "media_id": "q24-stimulus", "url": "", "placeholder": "A foil blister-pack backing printed with a large bold brand name OXACALM and a prominent strength 500 mg as its most visible elements. Near the crimped edge, in small embossed type, the lot code is printed as L4471K. The final character of the small lot code is the letter K.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "label_feature",
+          "name": "Correct statement about the backing",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The small lot code near the edge ends in the letter K.",
+            "The small lot code near the edge ends in the letter R.",
+            "The backing shows no lot code at all."
+          ],
+          "answer": "The small lot code near the edge ends in the letter K.",
+          "reason": "The lot code is embossed in small type near the crimped edge as L4471K and ends in the letter K. The bold brand name OXACALM and the 500 mg strength are salient decoys that are not the lot code, and reading the final character as the similar letter R or missing the lot code entirely are the attention failures the distractors capture.",
+          "skills": [ { "id": "S2", "name": "Attention to Detail" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    },
+    {
+      "item_id": "25",
+      "project": "entity-reference-verification",
+      "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+      "is_trap": false,
+      "cognitive_level": "analyze",
+      "difficulty_provisional": "Provisional moderate, to be overwritten by observed p-value.",
+      "flag_for_review": false,
+      "provisional_mcc_estimate": "A minimally competent worker scans both observations and names the single conflicting field. Provisional and non-load-bearing.",
+      "prompt": "Two catalog rows for what is claimed to be the same part are shown. Identify the one specific discrepancy between them.",
+      "media": [
+        { "media_id": "q25-stimulus", "url": "", "placeholder": "Two rows labeled Listing A and Listing B for a bearing. Listing A shows part number BR-6204, bore 20 mm, outer diameter 47 mm, width 14 mm. Listing B shows part number BR-6204, bore 20 mm, outer diameter 47 mm, width 14 mm. The seal type is 2RS on Listing A and ZZ on Listing B. Every numeric field and the part number match, and only the seal type differs, 2RS against ZZ.", "image_status": "pending", "key_confidence": "low", "requires_human_key_review": true }
+      ],
+      "fields": [
+        {
+          "field_key": "discrepancy",
+          "name": "The single discrepancy between the listings",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": [
+            "The two listings differ in their seal type.",
+            "The two listings differ in their bore dimension.",
+            "The two listings differ in their part number."
+          ],
+          "answer": "The two listings differ in their seal type.",
+          "reason": "The part number and every numeric dimension match across the two listings, and the only conflict is the seal type, 2RS on Listing A against ZZ on Listing B. The bore reads 20 mm on both and the part number is BR-6204 on both, so neither distractor names a real difference.",
+          "skills": [ { "id": "S3", "name": "Difference Detection" } ],
+          "requires_human_key_review": true,
+          "key_confidence": "low"
+        }
+      ]
+    }
+  ],
+  "validity_argument": {
+    "bank_level": {
+      "claim": "A worker who passes this bank can perform high-quality work on entity-reference-verification, the kind of work its required skills demand.",
+      "construct_sampled": "The in-scope and objective-assessable skills S1 Instruction Reading, S2 Attention to Detail, S3 Difference Detection, S4 Objectivity, S5 Calibrated Judgment, and S6 Source Validity Judgment, sampled in proportion to the entity-reference-verification weight column.",
+      "scoring_inference": "Each objective field is keyed by code to one correct option, field scores roll up per frozen skill into a skill profile, and the profile aggregates into a composite, with no cutoff applied here.",
+      "generalization_warrant": "Blueprint coverage of every in-scope objective-assessable skill, with every weight four or five skill measured across more than one item, supports generalization from these items to the skill domain.",
+      "extrapolation_warrant": "OPEN pending a criterion study. Generic scenarios were chosen over reproductions of the real task, which lowers fidelity and leaves the link to on-the-job performance a hypothesis to be tested against downstream job-performance data."
+    },
+    "per_high_weight_skill": [
+      {
+        "skill_id": "S1",
+        "claim": "A capable worker can decompose a stated requirement into its distinct governing conditions before judging.",
+        "evidence_warranted": "Correctly enumerates every separate condition embedded in a compound instruction, neither merging nor dropping one.",
+        "evidence_excluded_by_boundary": "Excludes applying the conditions to any evidence and judging the underlying content, the item is decided by parsing the instruction alone.",
+        "task_format_chosen": "Objective extraction with one correct condition set and distractors that drop a stated condition or add an unstated one.",
+        "format_validity_rationale": "An instruction-comprehension construct has a single defensible parse, so a single-keyed extraction item measures it without forcing arbitrariness."
+      },
+      {
+        "skill_id": "S2",
+        "claim": "A capable worker can detect the small but consequential feature that decides a verdict.",
+        "evidence_warranted": "Identifies the single small deciding feature in one field while a salient element competes for attention.",
+        "evidence_excluded_by_boundary": "Excludes cross-comparing two observations and weighing confidence, the item turns on one feature in one field.",
+        "task_format_chosen": "Objective single-keyed decision with a salient decoy and a near-miss misread distractor.",
+        "format_validity_rationale": "A perceptual verdict on visible detail has one defensible answer, so a single-keyed item with diagnostic distractors fits."
+      },
+      {
+        "skill_id": "S3",
+        "claim": "A capable worker can identify the specific correspondences and conflicts between two observations.",
+        "evidence_warranted": "Names the one field that conflicts across two otherwise matching observations.",
+        "evidence_excluded_by_boundary": "Excludes noticing a feature in a single field and ranking by overall quality, the item turns on a two-field correspondence.",
+        "task_format_chosen": "Objective single-keyed decision naming the conflicting field, with non-conflicting fields as distractors.",
+        "format_validity_rationale": "A pairwise difference has one defensible answer provable from the two fields, so a single-keyed item fits."
+      },
+      {
+        "skill_id": "S4",
+        "claim": "A capable worker can base the verdict only on genuinely relevant identifying evidence.",
+        "evidence_warranted": "Reaches the verdict the unit-specific evidence supports while resisting a surface-resemblance or category-similarity lure.",
+        "evidence_excluded_by_boundary": "Excludes confidence calibration, the relevant evidence is present and decisive and only its proper use is at issue.",
+        "task_format_chosen": "Objective single-keyed decision with surface-resemblance and category-similarity distractors.",
+        "format_validity_rationale": "With decisive relevant evidence present, one verdict is defensible, so a single-keyed item isolates whether the worker uses it."
+      },
+      {
+        "skill_id": "S5",
+        "claim": "A capable worker can match confidence to the completeness of the evidence, including recognizing when it is too thin to decide.",
+        "evidence_warranted": "Selects the one defensible conclusion band given the stated evidence, whether confirm, rule out, or insufficient.",
+        "evidence_excluded_by_boundary": "Excludes relevance judgment and source-fitness judgment, the source is fit and the evidence relevant and only its sufficiency is at issue.",
+        "task_format_chosen": "Objective band-selection item built only where one band is clearly defensible.",
+        "format_validity_rationale": "A calibration is keyed objectively only when one band is unambiguous, which avoids forcing a key onto a genuine judgment, otherwise it would need a subjective field."
+      }
+    ]
+  },
+  "question_bank_quality": {
+    "total_items": 25,
+    "per_skill": [
+      { "skill_id": "S1", "count": 4, "deciding_count": 4, "exercised": true, "meets_representation_floor": true, "per_skill_sem_warning": "Fewer than six items measure this deciding skill, so the per-skill score carries a wide standard error and is a provisional profile signal most reliable at the composite level, to be replaced by observed item statistics after piloting." },
+      { "skill_id": "S2", "count": 5, "deciding_count": 5, "exercised": true, "meets_representation_floor": true, "per_skill_sem_warning": "Fewer than six items measure this deciding skill, so the per-skill score carries a wide standard error and is a provisional profile signal most reliable at the composite level, to be replaced by observed item statistics after piloting." },
+      { "skill_id": "S3", "count": 5, "deciding_count": 5, "exercised": true, "meets_representation_floor": true, "per_skill_sem_warning": "Fewer than six items measure this deciding skill, so the per-skill score carries a wide standard error and is a provisional profile signal most reliable at the composite level, to be replaced by observed item statistics after piloting." },
+      { "skill_id": "S4", "count": 4, "deciding_count": 4, "exercised": true, "meets_representation_floor": true, "per_skill_sem_warning": "Fewer than six items measure this deciding skill, so the per-skill score carries a wide standard error and is a provisional profile signal most reliable at the composite level, to be replaced by observed item statistics after piloting." },
+      { "skill_id": "S5", "count": 4, "deciding_count": 4, "exercised": true, "meets_representation_floor": true, "per_skill_sem_warning": "Fewer than six items measure this deciding skill, so the per-skill score carries a wide standard error and is a provisional profile signal most reliable at the composite level, to be replaced by observed item statistics after piloting." },
+      { "skill_id": "S6", "count": 3, "deciding_count": 2, "exercised": true, "meets_representation_floor": true, "per_skill_sem_warning": "Only three items with a deciding count of two measure this skill, the thinnest coverage in the bank, so the per-skill score carries the widest standard error and is a provisional profile signal, to be replaced by observed item statistics after piloting." }
+    ],
+    "skills_out_of_scope": [
+      "S8 Specification Conformance, weight 0 for entity-reference-verification",
+      "S9 Spatial Alignment, weight 0 for entity-reference-verification",
+      "S10 Plausibility Assessment, weight 0 for entity-reference-verification",
+      "S11 Systematic Coverage, weight 0 for entity-reference-verification"
+    ],
+    "skills_not_covered_under_type": [
+      "S7 Clear Writing, in scope at weight 4, has no valid single-keyed objective form because it is an open-justification competency graded against the quality of the writing, so it is not assessable under the Objective type and is excluded from this bank."
+    ],
+    "blueprint_realized_vs_target": "Target raw quotas over 25 items were S1 3.70, S2 4.63, S3 4.63, S4 4.63, S5 4.63, and S6 2.78. Realized allocation after the representation floor and largest-remainder distribution is S1 4, S2 5, S3 5, S4 4, S5 4, and S6 3, summing to 25. Of the four leftover items beyond the floored quotas, the first two went to S6 and S1 by largest fractional remainder and the next two went to S2 and S3 by the higher-weight then lower-skill-id tie-break.",
+    "reliability_risk_notes": [
+      "Short bank of 25 items with per-skill counts of two to five, so per-skill decision consistency is limited and the composite is the more reliable signal.",
+      "S6 Source Validity Judgment has the thinnest coverage at three items with a deciding count of two, the widest per-skill standard error in the bank.",
+      "Single served form at pool factor one, which gives no parallel-form equating and no exposure control at scale."
+    ],
+    "coverage_gaps": [
+      "S7 Clear Writing, weight 4 for entity-reference-verification, is not represented because the Objective type admits no valid single-keyed form for an open-justification skill. Recorded here rather than padded over. It is assessable under the Subjective or Both type."
+    ],
+    "reading_load_scan": "Scenarios use short plain sentences and concrete nouns, avoid culture-bound and idiomatic content, and keep the deciding detail short to read, so reading load is not a source of construct-irrelevant difficulty.",
+    "item_writing_defect_check": "Each objective field states the full problem in the stem, offers three mutually exclusive options parallel in grammar and length, avoids all-of-the-above, none-of-the-above, and combination options, builds each distractor from a named error mode of the probed skill, and lets no item clue another.",
+    "stimulus_status": "Pending. Every media entry is a placeholder brief with an empty url and image_status pending, and the pipeline fills each url by media_id. No verdict rests on a generated or instruction-conditioned image.",
+    "global_checks": "Items are unambiguous with one defensible answer each, every field carries a frozen registry skill tag, no near-duplicate shares both scenario type and probed skill, the mixed arrangement places no two consecutive items on the same skill, and house style is clean throughout.",
+    "flags": [
+      "Every field is marked unconfirmed and all wording is provisional pending human key review.",
+      "Perceptual items on S2, S3, and S4 and the obscured-source item on S6 carry low or medium key confidence and require human key review once the assets are rendered.",
+      "S7 Clear Writing is omitted under the Objective type as a logged coverage gap, not a silent drop.",
+      "Each covered skill is measured by fewer than six items, so per-skill standard error is wide and item statistics are provisional.",
+      "The extrapolation warrant is OPEN because no criterion data is collected here.",
+      "Pool factor is one, a single served form with no exposure-control variants."
+    ],
+    "result": "The bank covers every in-scope objective-assessable skill for entity-reference-verification in proportion to the weight column, meets the representation floor on all six covered skills, and isolates each item to one construct with diagnostic distractors. S7 Clear Writing is in scope at weight four but is not assessable by a single-keyed item and is recorded as a coverage gap under the Objective type rather than forced or hidden. Per-skill scores carry wide standard errors because each skill is measured by fewer than six items, so the bank is most reliable at the composite and as a profile signal, and all item statistics are provisional pending piloting. No pass, fail, or cutoff is asserted."
+  },
+  "worker_grading_rubric": {
+    "dimensions": [
+      { "field_type": "objective", "skill_id": "S1", "correct_response_looks_like": "The worker selects the option that lists every stated condition with none added and none dropped.", "common_errors": "Dropping a stated condition or importing a condition the instruction never states." },
+      { "field_type": "objective", "skill_id": "S2", "correct_response_looks_like": "The worker selects the option naming the small deciding feature and ignores the salient decoy.", "common_errors": "Following the salient element or misreading a near-identical character." },
+      { "field_type": "objective", "skill_id": "S3", "correct_response_looks_like": "The worker selects the option naming the single conflicting field across the two observations.", "common_errors": "Declaring no difference under heavy overlap or naming a field that actually matches." },
+      { "field_type": "objective", "skill_id": "S4", "correct_response_looks_like": "The worker selects the verdict the unit-specific identifying evidence supports.", "common_errors": "Resting on shared category, brand, or style resemblance instead of the identifying evidence." },
+      { "field_type": "objective", "skill_id": "S5", "correct_response_looks_like": "The worker selects the conclusion band the stated evidence defensibly supports, including insufficient when a unique identifier is missing.", "common_errors": "Overconfidence from a weak partial match or false exclusion from a missing datum." },
+      { "field_type": "objective", "skill_id": "S6", "correct_response_looks_like": "The worker selects whether the source is fit for the intended check and names the fitness defect when it is not.", "common_errors": "Proceeding on a structurally unfit source or confusing a wrong-subject defect with an illegibility defect." }
+    ],
+    "stated_pass_target": "Stated as a target only and never applied here. The aspiration is that a minimally competent worker keys the deciding detail on most items within each skill and is separated from a guesser by the trap items, while the platform owns any actual cutoff."
+  },
+  "skillset": {
+    "usage_map": [
+      { "skill_id": "S1", "name": "Instruction Reading", "items": [ "3", "9", "15", "21" ] },
+      { "skill_id": "S2", "name": "Attention to Detail", "items": [ "1", "7", "13", "19", "24" ] },
+      { "skill_id": "S3", "name": "Difference Detection", "items": [ "2", "8", "14", "20", "25" ] },
+      { "skill_id": "S4", "name": "Objectivity", "items": [ "4", "10", "16", "22" ] },
+      { "skill_id": "S5", "name": "Calibrated Judgment", "items": [ "5", "11", "17", "23" ] },
+      { "skill_id": "S6", "name": "Source Validity Judgment", "items": [ "6", "12", "18" ] }
+    ]
+  }
+}

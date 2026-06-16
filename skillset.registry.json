@@ -1,0 +1,129 @@
+{
+  "skillset_version": 2,
+  "mode": "append",
+  "status": "append-only canonical registry, this prompt owns ids and freezes the canonical layer",
+  "projects": [
+    { "id": "P1", "name": "entity-reference-verification" },
+    { "id": "P2", "name": "i2i-pixel-aligned-filter-flux2-nomask" }
+  ],
+  "skills": [
+    {
+      "id": "S1",
+      "name": "Instruction Reading",
+      "description": "Decompose a stated requirement into the distinct conditions and criteria that govern a judgment before making it.",
+      "boundary": "Distinct from applying those criteria to the evidence and from judging the underlying content.",
+      "canonical_key": "instruction reading",
+      "weights": { "entity-reference-verification": 4, "i2i-pixel-aligned-filter-flux2-nomask": 4 }
+    },
+    {
+      "id": "S2",
+      "name": "Attention to Detail",
+      "description": "Detect small but consequential visual or textual features that determine a judgment.",
+      "boundary": "Distinct from comparing two observations and from deciding how strongly the evidence supports a conclusion.",
+      "canonical_key": "attention detail",
+      "weights": { "entity-reference-verification": 5, "i2i-pixel-aligned-filter-flux2-nomask": 5 }
+    },
+    {
+      "id": "S3",
+      "name": "Difference Detection",
+      "description": "Identify the specific correspondences and conflicts between two observations, such as matching, missing, or differing features.",
+      "boundary": "Distinct from noticing a single feature in isolation and from ranking options by overall quality.",
+      "canonical_key": "detection difference",
+      "weights": { "entity-reference-verification": 5, "i2i-pixel-aligned-filter-flux2-nomask": 5 }
+    },
+    {
+      "id": "S4",
+      "name": "Objectivity",
+      "description": "Base a conclusion only on the evidence genuinely relevant to it, excluding incidental signals, surface resemblance, and category-level similarity.",
+      "boundary": "Distinct from calibrating confidence when the relevant evidence is incomplete.",
+      "canonical_key": "objectivity",
+      "weights": { "entity-reference-verification": 5, "i2i-pixel-aligned-filter-flux2-nomask": 4 }
+    },
+    {
+      "id": "S5",
+      "name": "Calibrated Judgment",
+      "description": "Match the confidence of a conclusion to the clarity and completeness of the available evidence, and recognize when the evidence is too thin to decide at all.",
+      "boundary": "Distinct from judging whether the evidence is relevant, and from recognizing that the source material itself is unfit to judge.",
+      "canonical_key": "calibrated judgment",
+      "weights": { "entity-reference-verification": 5, "i2i-pixel-aligned-filter-flux2-nomask": 3 }
+    },
+    {
+      "id": "S6",
+      "name": "Source Validity Judgment",
+      "description": "Recognize when the source material itself is unfit for the intended judgment, separate from any difficulty in reaching that judgment.",
+      "boundary": "Distinct from being unable to decide a well-formed case, which is a confidence-calibration outcome.",
+      "canonical_key": "judgment source validity",
+      "weights": { "entity-reference-verification": 3 }
+    },
+    {
+      "id": "S7",
+      "name": "Clear Writing",
+      "description": "Express a conclusion and the specific evidence supporting it concisely and concretely, so another reader can audit the reasoning.",
+      "boundary": "Distinct from the correctness of the conclusion being explained.",
+      "canonical_key": "clear writing",
+      "weights": { "entity-reference-verification": 4 }
+    },
+    {
+      "id": "S8",
+      "name": "Specification Conformance",
+      "description": "Decide whether a realized result fulfills its governing instruction completely and correctly while introducing nothing the instruction did not call for.",
+      "boundary": "Distinct from detecting the raw differences between two observations, which feeds this, and from judging the intrinsic realism of the result.",
+      "canonical_key": "conformance specification",
+      "weights": { "i2i-pixel-aligned-filter-flux2-nomask": 5 }
+    },
+    {
+      "id": "S9",
+      "name": "Spatial Alignment",
+      "description": "Judge whether elements hold the same position, scale, and framing across two visual fields, independent of what those elements depict.",
+      "boundary": "Distinct from comparing the content of two observations, this concerns only geometric position and scale.",
+      "canonical_key": "alignment spatial",
+      "weights": { "i2i-pixel-aligned-filter-flux2-nomask": 5 }
+    },
+    {
+      "id": "S10",
+      "name": "Plausibility Assessment",
+      "description": "Judge whether an artifact is consistent with real-world physical, anatomical, and structural plausibility, identifying signs of fabrication or breakage.",
+      "boundary": "Distinct from noticing a feature and from comparing against a reference, this evaluates a single artifact against knowledge of how real things look and behave.",
+      "canonical_key": "assessment plausibility",
+      "weights": { "i2i-pixel-aligned-filter-flux2-nomask": 5 }
+    },
+    {
+      "id": "S11",
+      "name": "Systematic Coverage",
+      "description": "Work through every item in a fixed set of required checks so that nothing in scope is left unexamined.",
+      "boundary": "Distinct from the acuity to notice a small feature within an item, this ensures every required item is examined at all.",
+      "canonical_key": "coverage systematic",
+      "weights": { "i2i-pixel-aligned-filter-flux2-nomask": 3 }
+    }
+  ],
+  "aliases": [],
+  "provenance": [
+    { "project": "entity-reference-verification", "skill_id": "S1", "decision": "added", "requirement": "required", "proposed_name": "Instruction Reading", "anchor": "Read the entity type and label at the top, they tell you which match criteria apply.", "matched_on": "", "rationale": "Selecting the governing criteria before judging is decisive, since the wrong criteria set yields the wrong conclusion." },
+    { "project": "entity-reference-verification", "skill_id": "S2", "decision": "added", "requirement": "required", "proposed_name": "Attention to Detail", "anchor": "Find 1 to 3 identifying features that should match for the same entity, such as face structure, logo, signage, or markings.", "matched_on": "", "rationale": "Every correct conclusion turns on noticing the one small feature that decides it, so the competency is central." },
+    { "project": "entity-reference-verification", "skill_id": "S3", "decision": "added", "requirement": "required", "proposed_name": "Difference Detection", "anchor": "Pick a verdict based on whether those features actually match or clearly conflict.", "matched_on": "", "rationale": "The core decision is a structured comparison of two observations for match or conflict, the central act of the work." },
+    { "project": "entity-reference-verification", "skill_id": "S4", "decision": "added", "requirement": "required", "proposed_name": "Objectivity", "anchor": "Background, outfit, and lighting are not identity signals, and same breed does not equal same animal, called the number one mistake.", "matched_on": "", "rationale": "The work is dominated by suppressing tempting but irrelevant signals and resisting surface resemblance, the most emphasized discipline." },
+    { "project": "entity-reference-verification", "skill_id": "S5", "decision": "added", "requirement": "required", "proposed_name": "Calibrated Judgment", "anchor": "Choose the strong band when the feature is clearly visible, the weak band when angle or occlusion leaves doubt, and abstain when the call is a coin flip rather than forcing a weak decision.", "matched_on": "", "rationale": "The graded confidence scale and the choice to abstain when evidence is thin run through the whole task." },
+    { "project": "entity-reference-verification", "skill_id": "S6", "decision": "added", "requirement": "developable", "proposed_name": "Source Validity Judgment", "anchor": "Flag the input when the source itself is broken, for example when the two compared items are the same image and a thing cannot verify itself.", "matched_on": "", "rationale": "A distinct decision axis asks whether any worker could judge the input at all, separate from reaching the judgment itself." },
+    { "project": "entity-reference-verification", "skill_id": "S7", "decision": "added", "requirement": "required", "proposed_name": "Clear Writing", "anchor": "Write a short reason naming the specific features you used, since generic reasons such as looks the same score poorly.", "matched_on": "", "rationale": "Half of the scored quality is whether the justification names the specific evidence so a reviewer can audit it." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S1", "decision": "reused", "requirement": "required", "proposed_name": "Instruction Reading", "anchor": "Before looking at the images understand what should change and what should stay the same, everything not mentioned in the instruction should remain unchanged, and treat the three checks as independent.", "matched_on": "Decompose a stated requirement into the distinct conditions and criteria that govern a judgment before making it.", "rationale": "Resolving the directive into what may change, what must hold, and the separate axes of judgment is the foundation every later verdict rests on." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S2", "decision": "reused", "requirement": "required", "proposed_name": "Attention to Detail", "anchor": "Look for 6 fingers, missing or merged fingers, melted hands, misaligned eyes, distorted teeth, melted ears, smudged or over-smoothed textures.", "matched_on": "Detect small but consequential visual or textual features that determine a judgment.", "rationale": "Most failures hinge on perceiving one small feature, so fine perceptual acuity remains central here." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S3", "decision": "reused", "requirement": "required", "proposed_name": "Difference Detection", "anchor": "Use the image-flipping panel to identify changes, then carefully compare the original and edited images across face, hair, body, clothing, background, and objects.", "matched_on": "Identify the specific correspondences and conflicts between two observations, such as matching, missing, or differing features.", "rationale": "The structured comparison of two observations to surface every change is the engine of two of the three verdicts." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S4", "decision": "reused", "requirement": "required", "proposed_name": "Criterion Isolation", "anchor": "These questions are independent, judge each separately, and a wrong object edited counts only against the first check while a shifted image counts only against the second.", "matched_on": "Base a conclusion only on the evidence genuinely relevant to it, excluding incidental signals, surface resemblance, and category-level similarity.", "rationale": "Scoring several independent axes without letting a finding on one contaminate another is the same restrict-to-relevant-evidence discipline already frozen." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S5", "decision": "reused", "requirement": "required", "proposed_name": "Conservative Calibration", "anchor": "If you are unsure choose NO, and if you are uncertain about alignment or AI quality choose NO.", "matched_on": "Match the confidence of a conclusion to the clarity and completeness of the available evidence, and recognize when the evidence is too thin to decide at all.", "rationale": "A repeated rule resolves thin evidence by withholding the positive verdict, which is confidence calibrated to evidence strength." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S8", "decision": "added", "requirement": "required", "proposed_name": "Specification Conformance", "anchor": "Did the target make ALL of the instructed change and ONLY the instructed change, condition A all of the change, condition B only the change, nothing else should change, and a wrong, incomplete, or broken edit fails.", "matched_on": "", "rationale": "Deciding whether a realized change fulfills a directive fully, correctly, and exclusively is named the most important judgment in the work, and no frozen skill covers the conformance verdict beyond raw comparison." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S9", "decision": "added", "requirement": "required", "proposed_name": "Spatial Alignment", "anchor": "Are all unchanged areas perfectly aligned, this is only about position and scale not content, if you overlay the images do the unchanged areas line up, a shift, zoom, resize, or crop fails.", "matched_on": "", "rationale": "A dedicated axis judges geometric position and scale correspondence explicitly independent of content, a perceptual ability with no prior registry coverage." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S10", "decision": "added", "requirement": "required", "proposed_name": "Plausibility Assessment", "anchor": "Are both images free from artifacts that make an image look generated or broken, judged across anatomy, faces, text, object geometry, texture, and environment, such as six fingers, gibberish text, impossible geometry, and reflections that do not match.", "matched_on": "", "rationale": "A dedicated axis judges whether an artifact is physically and structurally plausible against world knowledge, distinct from comparison or from merely noticing a detail." },
+    { "project": "i2i-pixel-aligned-filter-flux2-nomask", "skill_id": "S11", "decision": "added", "requirement": "developable", "proposed_name": "Systematic Coverage", "anchor": "Inspect face, hair, body, hands, clothing, background, objects, text, shadows, reflections, image edges, and camera framing, then run the final audit checklist before submitting.", "matched_on": "", "rationale": "An explicit multi-region inspection list and a final audit list force exhaustive coverage so nothing in scope is missed, distinct from per-item acuity." }
+  ],
+  "flags": [
+    "A region-scoping discipline, attend only to the designated region and ignore salient content outside it, was folded into Objectivity as an out-of-scope incidental signal rather than minted as a separate skill.",
+    "Method-adherence, following an ordered multi-step procedure, was folded into Instruction Reading, since the scored deliverables are the decision and its justification rather than step coverage.",
+    "No brought-in subject expertise was extracted, since the document supplies the identity criteria for each case type and the worker applies them rather than supplying them.",
+    "Within the attention and diligence family, the completeness facet was added as Systematic Coverage and kept separate from the precision facet frozen as Attention to Detail, since each carries its own span and they dissociate. Consistency and Sustained Focus were not minted, as no long repetitive batch span exercises them.",
+    "ambiguous_match: Specification Conformance was added as a near neighbor of Difference Detection, with its boundary naming the distinction, since judging fulfillment of a directive is a separate verdict from detecting the raw differences that feed it."
+  ],
+  "changelog": [
+    "2026-06-16 v1 GENESIS project entity-reference-verification: added S1 to S7.",
+    "2026-06-16 v2 APPEND project i2i-pixel-aligned-filter-flux2-nomask, reused S1 S2 S3 S4 S5, added S8 Specification Conformance S9 Spatial Alignment S10 Plausibility Assessment S11 Systematic Coverage, sharpened no boundary, raised one omitted-candidate flag on the diligence family and one ambiguous_match flag on the comparison-conformance near pair. No existing id, name, description, boundary, or prior weight changed."
+  ]
+}
