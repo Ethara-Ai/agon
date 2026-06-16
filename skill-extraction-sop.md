@@ -1,4 +1,4 @@
-SKILL EXTRACTION PROMPT (EVIDENCE-GROUNDED, NORMALIZED, TWO-LAYER)
+SKILL EXTRACTION AND REGISTRY SOP (EVIDENCE-GROUNDED, NORMALIZED, TWO-LAYER, TWO-PASS, APPEND-ONLY)
 
 PURPOSE
 
@@ -6,7 +6,7 @@ Take one project requirement document and return the set of human skills the pro
 
 The named competencies in this prompt are illustrations of ABSTRACTION, never a checklist. Never emit a competency unless a span of these inputs forces it. A skill that is typical of the domain but absent from the text does not exist for this run.
 
-This prompt is a PROPOSER. It owns no frozen vocabulary, assigns no permanent ids, dedups against no live registry, and freezes nothing. It emits one artifact, a proposal-shaped skill set, that a downstream append-only governance SOP ingests. Treat your S1 numbering as local and provisional. Use this prompt on any project domain: software, language and editorial, data annotation, design, operations, research.
+This prompt OWNS the append-only canonical skill registry and runs in two sealed internal passes. PASS A is the stateless, registry-blind proposer, the METHOD below from Step 1 to Step 10, which recovers competencies from the inputs alone and never reads the registry. PASS B is the internal reconciler and registry writer, the RECONCILE AGAINST THE REGISTRY section, which reads the current registry, binds each recovered competency to an existing skill by meaning when one already covers it, appends only the genuinely new competencies at the next free id, assigns and freezes permanent ids, and emits the updated registry. There is no downstream governance SOP. On the very first run the registry is absent or empty, which is GENESIS mode and every competency is new. On every later run the registry is the frozen base, which is APPEND mode. Use this prompt on any project domain: software, language and editorial, data annotation, design, operations, research.
 
 ROLE
 
@@ -17,11 +17,12 @@ INPUT
 - REQUIREMENT DOCUMENT. The project requirement text, the SOP, the guideline, or the brief. This is the primary source you extract from and the governing authority. Together with any optional inputs supplied below, it forms a closed world. If a competency is not exercised by some span of this text or the optional inputs, it does not exist for this run, no matter how typical it is for the domain. You use the document only to decide which competency each activity exercises. You never copy or paraphrase its task content into a shipped field.
 - VENDOR GUIDELINES. OPTIONAL. Vendor-side instructions, standards, or constraints that shape how the work must be done. When present, treat it as part of the same closed world and mine it for competencies exactly as you mine the requirement document, anchoring each one to a concrete span. When absent, ignore it and add nothing from it. Its presence never mints a skill that no span forces.
 - CLIENT FEEDBACK. OPTIONAL. Client-side comments, corrections, or quality concerns on prior or expected output. When present, treat it as part of the same closed world and mine it for competencies exactly as you mine the requirement document, anchoring each one to a concrete span, including any quality bar or prohibition the feedback implies. When absent, ignore it and add nothing from it. Its presence never mints a skill that no span forces.
+- CURRENT REGISTRY. OPTIONAL. The append-only skill registry twin, the machine file skillset.registry.json and its human mirror skill.md, carrying the canonical skills already frozen across all prior projects. PASS A never reads this input, so the proposal it builds is never biased toward copying an existing name. PASS B reads it once. When it is absent, empty, or its skills array is empty, the run is GENESIS and every recovered competency is new. When it is present, the run is APPEND and the registry is the FROZEN BASE you carry forward byte for byte, adding only what no existing skill already covers. It is never part of the closed world PASS A mines, it is the vocabulary PASS B reconciles against.
 
 PARAMETERS
 
 - House style, hard inside every text value you author. No em dashes, no semicolons, no emojis, no markdown links, no casual filler. Plain text only. This binds every authored value, both shipped and internal.
-- Weight scale, fixed integer 0 to 5. One weight per skill, stating how central the competency is to the work overall. 0 is peripheral, 5 is decisive. It is a centrality property of the competency, never a per-project, per-task, or routing weight. It is the one field exempt from the acid test, because a lone centrality number names no task.
+- Weight scale, fixed integer 0 to 5. PASS A assigns one weight per skill, stating how central the competency is to THIS project. 0 is peripheral, 5 is decisive. PASS B records that weight in the registry as this project's column in a per-project weight matrix, so each skill carries one weight per project that exercises it and a skill a project does not exercise is read as 0. It is the one authored number exempt from the acid test, because a lone centrality number names no task. It is never a per-task or a routing weight.
 
 THE TWO LAYERS, AND HOW THE CONCRETE VS ABSTRACT TENSION IS RESOLVED
 
@@ -99,13 +100,13 @@ Step 6. Cluster to the smallest separable set. Merge two competencies that are o
 
 Step 7. Name, describe, and bound each surviving skill. A plain two or three word Title Case name with tool, subject, and seniority stripped. A verb-led description that names the specific judgment or action, abstract but precise, never vague mush such as notices things. A one-line boundary stating what this skill is distinct from among its nearest neighbors, in plain cognitive terms.
 
-Step 8. Flag required versus developable, then weight. A skill is REQUIRED if it is needed for a critical part of the work and a worker would have to bring it on day one because it cannot reasonably be learned in onboarding or a few weeks on the job. A competency a worker could acquire quickly on the job is DEVELOPABLE. The developable label informs the weight, it never drops a real skill, a competency the work genuinely exercises stays in the set even when it is trainable. Then assign a weight 0 to 5 for centrality across the whole document. Centrality, how decisive the ability is to the work, sets the weight. The verbs are a CEILING against inflation only, never a floor, familiar with and aware of cap low, use and apply and build cap mid, design and own and lead cap high. When a low-ceiling verb names the decisive ability the whole task is built on, centrality wins and the weight is high. Document length and policy page count never raise a weight and never raise an abstraction level.
+Step 8. Flag required versus developable, then weight. A skill is REQUIRED if it is needed for a critical part of the work and a worker would have to bring it on day one because it cannot reasonably be learned in onboarding or a few weeks on the job. A competency a worker could acquire quickly on the job is DEVELOPABLE. The developable label informs the weight, it never drops a real skill, a competency the work genuinely exercises stays in the set even when it is trainable. Then assign a weight 0 to 5 for centrality to this project, the document under this run. Centrality, how decisive the ability is to the work, sets the weight. The verbs are a CEILING against inflation only, never a floor, familiar with and aware of cap low, use and apply and build cap mid, design and own and lead cap high. When a low-ceiling verb names the decisive ability the whole task is built on, centrality wins and the weight is high. Document length and policy page count never raise a weight and never raise an abstraction level.
 
 Step 9. Run the confirmatory verification pass, then the recall pass.
   - Confirmatory pass, per skill, WITHOUT rereading the name you wrote. From the anchor alone, ask which competency this exact span forces a worker to exercise. If your fresh answer does not match the emitted skill, drop or re-derive it. This pass may only KEEP, DROP, or RE-DERIVE. It never invents a new skill.
   - Recall pass, over the whole document. Re-read the inventory from Step 2 and ask, for each competency you anchored to an activity, is it still represented in the final set, or did it get lost in clustering. Ask also, is there any activity, quality bar, or prohibition in the document that no current skill covers, including any abstention or self-gating clause. If a genuinely required competency was lost or never captured, add it now with its anchor. This is the only step that may add a skill, and it may add only a skill that traces to a span you can name.
 
-Step 10. Assign provisional ids S1 upward in order with no gap, run the pre-return check, and emit.
+Step 10. Assign local working ids P1 upward in order with no gap, the proposal namespace, never registry ids. For each surviving skill also compute its canonical_key, the canonical name lowercased with the stop words to, of, the, a, an, and, for, with removed and the remaining tokens sorted alphabetically, for example Edge Case Handling becomes case edge handling. Minor word-form differences across runs are expected and are caught by the near-key rule in PASS B, so the key need not be perfectly identical to stay useful. This finishes PASS A. The proposal you now hold, each skill carrying name, description, boundary, weight, requirement, anchor, rationale, and canonical_key, is an internal handshake consumed only by PASS B and never emitted. Do not run the pre-return check yet and do not emit, proceed to PASS B.
 
 GRANULARITY EXPECTATIONS
 
@@ -135,122 +136,137 @@ GOOD AND BAD CANONICAL LINES
 - GOOD. Vocabulary Command, choosing precise words and recognizing fine differences in meaning. BAD. English vocabulary. The bad line names a subject and is an unnormalized specimen. The language belongs in the anchor.
 - GOOD. Sustained Focus, holding accuracy steady over long repetitive work. BAD. notices things and stays sharp. The bad line is vague mush with no screenable meaning.
 
+PASS B, RECONCILE AGAINST THE REGISTRY
+
+PASS B is the only stateful stage and the only stage that reads the registry or assigns a permanent id. It takes the PASS A proposal, the internal list of skills each carrying name, description, boundary, weight, requirement, anchor, rationale, and canonical_key, plus the optional CURRENT REGISTRY, and it produces the updated registry twin. Run these sub-steps in order.
+
+R0. Select the mode. Read CURRENT REGISTRY. If it is absent, empty, or its skills array is empty, you are in GENESIS. Otherwise you are in APPEND. State the mode in the changelog line you will write. In GENESIS there is nothing to match, every PASS A skill is an ADD, so skip R1 to R7, go to id assignment, and seed ids S1 upward in proposal order. In APPEND, the registry is the frozen base, run R1 to R7 for each PASS A skill F.
+
+R1. Canonical-key fast path. Compute the canonical_key of every registry skill the same way PASS A computed F's. If F's key exactly equals a registry skill's key, that is strong evidence of the same competency, treat it as a provisional REUSE of that skill and still confirm it through the boundary gate R3 and the verification R7 before committing. If F's key shares at least half its tokens with a registry skill's key, or the two keys are synonyms of each other, do not decide on the key, send F to the full meaning test R2 against that skill. A key match is never the sole decider for a borderline case, and a key difference is never proof that F is new, because the whole problem is that the same ability surfaces under different names and therefore different keys.
+
+R2. Meaning test. For F with no exact key hit, fix F's identity from F's own anchor first, then its description and boundary, deliberately ignoring F's proposed name. Then test F against the registry. Lexical similarity may order which skills you test first, but you may not stop at the first miss, because a same-meaning twin is lexically distant by definition. Group the registry by the judgment each skill names and test every skill in the nearest group. For each candidate registry skill R, ask the dissociation question from Step 6, now across runs, could one worker be clearly strong at F and weak at R, or the reverse, and would a separate score on each mean a genuinely different thing. Anchor the test on whether R's frozen description and boundary already cover F's concrete anchor at R's altitude, so F's freshly written description is not the thing you compare on.
+
+R3. Boundary gate, the primary guard against over-merge. Before you commit any REUSE of R, check that F falls on the same side of every distinction R's boundary draws. If R's boundary explicitly fences off the very thing F is, R is a near neighbor and not a match, do not reuse it. This is what keeps near siblings permanently separate across runs.
+
+R4. Written dissociation line, the actual reuse versus add decider. Before you classify F against its best candidate R, write the one line in full, a worker strong in F and weak in R, where a separate score means a genuinely different thing, is or is not writable. If you can write that line truthfully, F is distinct, ADD it. If you cannot, REUSE R. There is one written test, never a silent default.
+
+R5. Directional overlap, for asymmetric cases. If F is broader than R, meaning F would also cover R plus other registry skills, F has drifted up to a family, do not add the family, descend F one rung with the absorption test and re-run R1 to R4 on the descended micro skills. If F is already at the micro rung and will neither descend nor reuse, ADD it as a sibling and record scope_pressure, never silently drop it. If F is narrower than R, a single facet of R, REUSE R only when R's frozen description and boundary already cover that facet in words, otherwise do not silently fold it, that is a covert re-scope, instead sharpen R's boundary by R6 or ADD a sibling and record scope_pressure. If F and R genuinely partially overlap, neither containing the other, ADD F as new, author F's boundary to name R explicitly so the two stay separable downstream, and record ambiguous_match naming R.
+
+R6. Boundary sharpening, the one in-place edit append-only allows. When a new project reveals a neighbor that an early coarse boundary fails to fence, PASS B may append a clause to a frozen boundary, the old boundary text preserved verbatim as the prefix and the new clause added as a suffix. This is the only change ever made to an existing skill's identity fields, it must be a pure suffix with the prior text intact, and it is logged in the changelog. It lets an early coarse boundary stop over-merging without any rename or re-scope.
+
+R7. Verify each decision, the cross-run mirror of the confirmatory pass. Every REUSE must quote the matched skill's stored description as matched_on and show that F's anchor is covered at that skill's abstraction altitude, not by lexical overlap of a concrete span with an abstract line, which never holds and would rubber stamp every case. Every ADD must name the registry skills it meaning-tested and show that none bound. This blocks both a hallucinated match made only to avoid adding and a hallucinated novelty made only to pad.
+
+Id assignment. After every F is classified, assign ids. In GENESIS, ids run S1 upward in proposal order. In APPEND, every REUSE keeps the matched registry id, name, description, and boundary byte for byte, and every ADD takes the next free id, the highest existing registry id plus one, in proposal order, with no gap and no reuse and no renumber of any existing id. Scan the registry by canonical_key once more before minting, so a replayed run does not append a second copy of a skill it already added.
+
+Weights and version. Record F's PASS A weight as this project's column in the weight matrix. For a REUSE add only the new project's key to that skill's weights and leave every prior column untouched. For an ADD open the weights with this project's key set. A skill a project does not exercise carries no key for that project and is read as 0, never write a 0 column across unrelated skills. Add this project to the projects list if it is new. Bump skillset_version and write one dated changelog line naming the mode, the reused ids, the added ids and names, any boundary sharpened, and any flags raised. A run that matches everything and mints nothing and changes no weight writes nothing and does not bump the version.
+
+APPEND-ONLY CONTRACT
+
+This binds PASS B. An existing skill's id, name, description, and every prior project weight are permanent. The only changes you may ever make are additive, a new skill row, a new project column on a skill the new project exercises, and a single append-only suffix on a boundary by R6. Ids are assigned in order and never reused or renumbered. Nothing is ever renamed, re-scoped, merged, split, or deleted. A finer sub ability a richer later project reveals is an ADDed sibling with a distinguishing boundary, never a split of an existing skill, and the pressure is recorded as scope_pressure. When a later run proves an earlier ADD was a duplicate of an existing skill, you do not rename or delete it, you write an append-only alias record, the duplicate id kept and its superseded_by set to the surviving id, so the downstream scorer maps the old id onto the survivor and no frozen id ever changes meaning.
+
 OUTPUT CONTRACT
 
-Emit exactly one valid JSON object. Double quotes, no trailing commas, no comments, no markdown fence, plain text only. The shipped object carries the canonical layer plus internal proposer fields the consumer may drop. Use exactly these keys.
+PASS B emits the updated registry twin and nothing else, the machine file skillset.registry.json first and then its human mirror skill.md, each immediately preceded by one line stating only its filename. Both carry the identical skillset_version. No markdown fence around the JSON, double quotes, no trailing commas, no comments. The canonical layer, the frozen id, name, description, boundary, and the per-project weights, is the shipped vocabulary the downstream scorer consumes. The anchor, rationale, requirement, proposed_name, and matched_on are internal proposer-side audit, carried in provenance, never fused into a frozen skill row.
+
+skillset.registry.json uses exactly these keys.
 
 {
-  "skillset_version": "proposal-local",
-  "status": "proposed additions, provisional ids, governance assigns final ids",
+  "skillset_version": 1,
+  "mode": "genesis or append",
+  "status": "append-only canonical registry, this prompt owns ids and freezes the canonical layer",
+  "projects": [
+    { "id": "P1", "name": "this run's project name" }
+  ],
   "skills": [
     {
       "id": "S1",
       "name": "Two Or Three Word Title Case Canonical Name",
       "description": "Verb-led abstract statement of the specific judgment or action, task-agnostic.",
       "boundary": "One line of what this skill is distinct from among its nearest neighbors.",
-      "weight": 0,
+      "canonical_key": "alphabetically sorted normalized tokens",
+      "weights": { "this run's project name": 0 }
+    }
+  ],
+  "aliases": [
+    { "alias_id": "S12", "superseded_by": "S3", "note": "dated reason, scorer maps S12 onto S3" }
+  ],
+  "provenance": [
+    {
+      "project": "this run's project name",
+      "skill_id": "S1",
+      "decision": "added or reused",
       "requirement": "required or developable",
-      "anchor": "Verbatim quote or tight paraphrase of the document span that forces this competency, internal only.",
-      "rationale": "One internal line tracing the skill to the document at the abstract level and justifying the weight, names no task."
+      "proposed_name": "the PASS A name, kept when reused so the fold is auditable",
+      "anchor": "verbatim span from this project's document that forced the competency, internal only",
+      "matched_on": "the registry description a reuse bound to, empty on an add",
+      "rationale": "one internal line tracing the decision, names no task"
     }
   ],
   "flags": [
-    "One line per competency you omitted for thin evidence or merged as an undecidable pair for the maintainer, naming no task."
+    "one line per ambiguous_match, scope_pressure, omitted thin candidate, or same-name-different-meaning collision, naming no task"
+  ],
+  "changelog": [
+    "dated line per run naming mode, reused ids, added ids and names, any boundary sharpened, any flags"
   ]
 }
 
 Field rules.
-- skillset_version. The fixed literal proposal-local. You do not author a real version.
-- status. The fixed literal above. It declares this output is a proposal and that downstream governance owns final ids, dedup against the live registry, and freezing.
-- id. Provisional S1 upward, in order, no gap, no reuse. These ids are local. Governance reassigns them to the next free registry id on append, so they never collide with frozen ids.
-- name. Plain two or three word Title Case canonical name, normalized, carrying no tool, no subject or domain qualifier, no seniority, no role title, and no bare family word.
-- description. Abstract, task-agnostic, verb-led, names the specific judgment. Passes the acid test.
-- boundary. One line distinguishing the skill from its neighbors in cognitive terms. Passes the acid test.
-- weight. Integer 0 to 5, centrality to the work overall.
-- requirement. The literal required or developable, by the day-one test. Informs weight, never drops a real skill.
-- anchor. Required, non-empty, concrete. The evidence that makes the abstraction honest. Internal and auditing only, exempt from the acid test, dropped at the consumer boundary. Names a real span from the document, never a fabrication.
-- rationale. Required, non-empty, internal. Must itself pass the acid test and name no task.
-- flags. Zero or more lines, the non-fabricating escape hatch. One line per candidate omitted for thin evidence, and one per undecidable pair merged for the maintainer. Each line names no task. An empty array is allowed.
+- skillset_version. A real monotonic integer. GENESIS emits 1. APPEND bumps it by one on any write and leaves it unchanged on a run that mints nothing and changes no weight.
+- mode. The literal genesis or append, set by R0.
+- status. The fixed literal above, declaring the registry is append-only and this prompt owns ids and freezes the canonical layer.
+- projects. Every project that has contributed to the registry, each with a stable Pid and the project name used as the weight key.
+- skills. The frozen canonical vocabulary. Each skill carries id, name, description, boundary, canonical_key, and weights. In APPEND every existing skill is reproduced with its id, name, description, and boundary byte for byte, except a boundary that took an append-only suffix by R6.
+- id. Permanent. GENESIS seeds S1 upward, APPEND assigns the highest existing id plus one to each ADD, in order, no gap, no reuse, no renumber.
+- name, description, boundary. The canonical layer, authored by PASS A only for a genuinely new skill and frozen forever after. Each passes the acid test, the altitude tests, and house style. On a REUSE the registry values win and the PASS A values are discarded into provenance.
+- canonical_key. The deterministic dedup key, recomputed and stored for every skill.
+- weights. A per-project map, one integer 0 to 5 per project that exercises the skill. A project absent from the map is read as 0. Prior columns are immutable.
+- aliases. Append-only records reconciling a proven duplicate onto its survivor, never a rename or a delete. An empty array is allowed.
+- provenance. Internal, one entry per project per skill, carrying the dropped anchor, the requirement, the proposed name, the reuse match, and the rationale. Each line passes the acid test and names no task.
+- flags. Zero or more lines, the non-fabricating escape hatch, one per ambiguous_match, scope_pressure, thin omitted candidate, or same-name-different-meaning collision. Each names no task. An empty array is allowed.
+- changelog. Append-only, one dated line per writing run.
 
-The canonical vocabulary keeps only id, name, description, boundary, and weight. The requirement, anchor, rationale, and flags are proposer-side and the consumer may drop them. The anchor and any normalization reasoning are never fused into a shipped field, so no concrete detail can leak past the boundary.
+skill.md mirrors skillset.registry.json in plain markdown on the identical version, in this order, a title and one line of purpose, the version and mode, the changelog newest first, the append-only contract stated plainly, a projects table, a canonical skills table with the columns id, name, description, boundary, and one weight column per project, and a short per-run reconciliation note stating which proposed name folded into which frozen id. The two files never disagree on any shared value.
 
 WORKED MICRO-EXAMPLE
 
-Input snippet. Contributors write small Python functions from a short spec, then run a provided test suite. Submissions must follow the style guide, handle the listed edge cases, and fail loudly with actionable errors. Code that fails any test is rejected.
+GENESIS run, project alpha. Input snippet. Contributors write small Python functions from a short spec, then run a provided test suite. Submissions must follow the style guide, handle the listed edge cases, and fail loudly with actionable errors. The registry is absent, so the mode is genesis. PASS A normalizes Python functions to Code Implementation by the swap test, the spec to Specification Reading, the edge cases to Edge Case Handling, the style guide to Convention Adherence, and the actionable error message to Explanatory Writing, holding local ids P1 to P5. PASS B has nothing to match, seeds ids S1 to S5 in proposal order, writes project alpha's weight column, and emits version 1.
 
-Internal, not shipped. Anchors, wrote Python functions, ran a test suite, read a spec, handled listed edge cases, followed a style guide, fail loudly with actionable errors. The last quality bar forces TWO competencies, deliberate error-path handling AND writing an actionable message, so it is not collapsed into one. Normalization, Python functions to Code Implementation by the swap test, the spec to Specification Reading, the edge cases to Edge Case Handling, the style guide to Convention Adherence, the actionable error message to Explanatory Writing.
-
-Shipped output.
+skillset.registry.json
 {
-  "skillset_version": "proposal-local",
-  "status": "proposed additions, provisional ids, governance assigns final ids",
+  "skillset_version": 1,
+  "mode": "genesis",
+  "status": "append-only canonical registry, this prompt owns ids and freezes the canonical layer",
+  "projects": [ { "id": "P1", "name": "alpha" } ],
   "skills": [
-    {
-      "id": "S1",
-      "name": "Code Implementation",
-      "description": "Express a fully specified procedure as correct working instructions a machine executes.",
-      "boundary": "Distinct from verifying the result, this produces the working solution.",
-      "weight": 5,
-      "requirement": "required",
-      "anchor": "write small Python functions from a short spec",
-      "rationale": "The central producing ability the whole task is built on, weighted top."
-    },
-    {
-      "id": "S2",
-      "name": "Specification Reading",
-      "description": "Extract precise requirements from a brief description without adding or dropping intent.",
-      "boundary": "Distinct from implementing, this fixes what must be built.",
-      "weight": 4,
-      "requirement": "required",
-      "anchor": "from a short spec",
-      "rationale": "Every submission begins by reading intent off a terse spec, decisive for correctness."
-    },
-    {
-      "id": "S3",
-      "name": "Edge Case Handling",
-      "description": "Anticipate boundary and exceptional inputs and account for them deliberately.",
-      "boundary": "Distinct from the main path, this covers the rare and the extreme.",
-      "weight": 4,
-      "requirement": "required",
-      "anchor": "handle the listed edge cases",
-      "rationale": "Explicitly demanded and gated by the tests, central to passing."
-    },
-    {
-      "id": "S4",
-      "name": "Convention Adherence",
-      "description": "Conform output to a fixed set of formatting and style rules.",
-      "boundary": "Distinct from correctness, this governs form and not function.",
-      "weight": 2,
-      "requirement": "developable",
-      "anchor": "must follow the style guide",
-      "rationale": "Required but learnable on the job, secondary to a passing result."
-    },
-    {
-      "id": "S5",
-      "name": "Explanatory Writing",
-      "description": "Communicate a result or fault clearly and briefly so another party can act on it.",
-      "boundary": "Distinct from handling the fault, this makes the fault legible to a reader.",
-      "weight": 2,
-      "requirement": "required",
-      "anchor": "fail loudly with actionable errors",
-      "rationale": "A quality bar forces a communication ability separate from the error handling itself."
-    }
+    { "id": "S1", "name": "Code Implementation", "description": "Express a fully specified procedure as correct working instructions a machine executes.", "boundary": "Distinct from verifying the result, this produces the working solution.", "canonical_key": "code implementation", "weights": { "alpha": 5 } },
+    { "id": "S2", "name": "Specification Reading", "description": "Extract precise requirements from a brief description without adding or dropping intent.", "boundary": "Distinct from implementing, this fixes what must be built.", "canonical_key": "reading specification", "weights": { "alpha": 4 } },
+    { "id": "S3", "name": "Edge Case Handling", "description": "Anticipate boundary and exceptional inputs and account for them deliberately.", "boundary": "Distinct from the main path, this covers the rare and the extreme.", "canonical_key": "case edge handling", "weights": { "alpha": 4 } },
+    { "id": "S4", "name": "Convention Adherence", "description": "Conform output to a fixed set of formatting and style rules.", "boundary": "Distinct from correctness, this governs form and not function.", "canonical_key": "adherence convention", "weights": { "alpha": 2 } },
+    { "id": "S5", "name": "Explanatory Writing", "description": "Communicate a result or fault clearly and briefly so another party can act on it.", "boundary": "Distinct from handling the fault, this makes the fault legible to a reader.", "canonical_key": "explanatory writing", "weights": { "alpha": 2 } }
   ],
-  "flags": []
+  "aliases": [],
+  "provenance": [
+    { "project": "alpha", "skill_id": "S1", "decision": "added", "requirement": "required", "proposed_name": "Code Implementation", "anchor": "write small Python functions from a short spec", "matched_on": "", "rationale": "The central producing ability the whole task is built on." }
+  ],
+  "flags": [],
+  "changelog": [ "2026-06-16 v1 GENESIS project alpha: added S1 to S5." ]
 }
+
+APPEND run, project beta. A later project asks contributors to write small functions in Go from a brief, cover the unusual inputs, and return a clear message on failure. The registry above is present, so the mode is append. PASS A, blind to the registry, recovers Procedure Encoding, Brief Comprehension, Boundary Input Handling, Message Clarity, and Concurrency Reasoning. PASS B reconciles each. Procedure Encoding has canonical_key encoding procedure, no exact key hit, the meaning test against S1 Code Implementation binds on the anchor, S1's boundary is not crossed, the dissociation line cannot be written, so it is a REUSE of S1, the fresh name Procedure Encoding is discarded into provenance and S1 gains weights.beta. This is the same-ability-different-name case the registry exists to absorb. Brief Comprehension binds by meaning to S2, REUSE. Boundary Input Handling has no exact key hit, the meaning test binds it to S3 Edge Case Handling, REUSE. Message Clarity binds to S5, REUSE. Concurrency Reasoning matches no registry skill, R7 names S1 to S5 and shows none bind, so it is ADDed as S6 with weights.beta. PASS B appends project beta, sets the new weight columns, and bumps to version 2.
+
+Resulting changelog line. 2026-06-16 v2 APPEND project beta, reused S1 and S2 and S3 and S5, added S6 Concurrency Reasoning at beta weight 4, sharpened no boundary, raised no flag. No existing id, name, description, boundary, or alpha weight changed.
 
 PRE-RETURN CHECK
 
-- Output is exactly one valid JSON object with skillset_version, status, a skills array, and a flags array, and nothing else. No markdown fence.
-- skillset_version is proposal-local and status is the fixed proposal literal.
-- Every skill has id, name, description, boundary, weight, requirement, anchor, and rationale, all non-empty. Provisional ids run from S1 in order with no gap and no reuse.
-- Every name is a normalized two or three word Title Case competency, carrying no tool, no subject or domain qualifier, no seniority, no role or occupation title, and no bare family word.
-- Each shipped skill traces to a concrete anchor you can point to in the document, direct, structural, quality-bar, or prohibition. No skill survives on world knowledge alone, and no example competency from this prompt was emitted without its own span.
+- Two artifacts are emitted and nothing else, skillset.registry.json first then skill.md, each preceded by one line stating only its filename, both on the identical skillset_version and agreeing on every shared value. No markdown fence around the JSON, double quotes, no trailing commas.
+- The mode is stated and correct, genesis when the input registry was absent or empty, append otherwise. skillset_version is a real integer, 1 in genesis, bumped by one on any append write, unchanged on a run that mints nothing and changes no weight.
+- In APPEND, every existing skill is reproduced with its id, name, description, and every prior project weight identical byte for byte to the input registry. The only differences anywhere are appended skill rows, an appended project and its new weight columns, any single append-only boundary suffix logged in the changelog, and appended alias, provenance, flag, and changelog lines. No existing skill was renamed, re-scoped, merged, split, or deleted.
+- Every new id is the highest prior id plus one, assigned in order, with no gap, no reuse, and no renumber of any existing id. In genesis ids run from S1. The registry was scanned by canonical_key before any mint, so a replay adds no duplicate.
+- Every REUSE carries a matched_on quote from the matched skill's stored description and a written line showing the dissociation line could not be written, and the reused row kept its frozen name, description, and boundary while the PASS A name went to provenance. Every ADD names the registry skills it meaning-tested and shows none bound. No decision rests on surface name.
+- Every REUSEd skill gained only the new project's weight, all prior columns unchanged, and a skill a project does not exercise carries no column for it. A finer sub ability was added as a sibling and recorded as scope_pressure, never as a split. An ambiguous_match flag is present for every genuine partial overlap and every near neighbor.
+- Every new skill has id, name, description, boundary, canonical_key, weights, and a provenance line with anchor and rationale, all non-empty. Each new name traces to a concrete anchor you can point to in the document, direct, structural, quality-bar, or prohibition. No skill survives on world knowledge alone, and no example competency from this prompt was emitted without its own span.
+- Every new name is a normalized two or three word Title Case competency, carrying no tool, no subject or domain qualifier, no seniority, no role or occupation title, and no bare family word, and it passes the nearest-sibling swap test and the absorption test. Every artifact-shaped verb was named by its judgment and not its deliverable. No description is vague mush, each names a specific judgment and is paired with a real boundary.
 - The acid test passes on every name, description, boundary, and rationale. No shipped or internal-authored field except the anchor names or implies a task, a stimulus, an option or verdict label, a tool, a subject, or the project. The anchor and the weight are exempt.
-- Each name passes the nearest-sibling swap test and the absorption test, and every artifact-shaped verb was named by its judgment and not its deliverable. No description is vague mush, each names a specific judgment and is paired with a real boundary.
-- Each entry is an ability a person can do, not a tool used, not an artifact produced, not a role.
-- The set is the smallest separable set. For every near pair you kept you can name a person strong in one and weak in the other, every undecidable pair was merged and flagged rather than kept, and no enumerated comma-list was shattered into near-duplicates. No two skills are the same ability restated.
-- A lone tool or library or pipeline noun did not by itself mint a separate technical skill, two technical skills were kept apart only where each had its own activity span.
-- Both verification passes were run. The confirmatory pass kept, dropped, or re-derived only. The recall pass re-checked the inventory, the quality-bar and prohibition clauses, and any abstention or self-gating clause, and any genuinely required competency lost in clustering was restored.
-- Every weight is an integer 0 to 5, set by centrality with the verb table as a ceiling only, never lowered below the decisive ability because its verb is mild, and never raised by document length or page count. The requirement label is required or developable and dropped no real skill.
+- Both PASS A verification passes were run, the confirmatory pass kept, dropped, or re-derived only, and the recall pass restored any genuinely required competency lost in clustering. The PASS A set was the smallest separable set before reconciliation, and no two new skills are the same ability restated.
+- Every weight is an integer 0 to 5, set by centrality to this project with the verb table as a ceiling only, never lowered below the decisive ability because its verb is mild, and never raised by document length or page count. The requirement label is required or developable and dropped no real skill.
 - House style holds in every authored value. No em dashes, no semicolons, no emojis, no markdown links, no casual filler.
