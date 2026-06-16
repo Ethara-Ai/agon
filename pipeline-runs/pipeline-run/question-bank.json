@@ -1,0 +1,506 @@
+{
+  "provenance": {
+    "skillset_version": "v1-2026-06-15",
+    "count_setting": "auto",
+    "arrangement": "mixed",
+    "house_style": "no em dashes, no semicolons, no emojis",
+    "source_input": "skill.md frozen skill vocabulary, the only input consumed",
+    "note": "No SOP and no production task were supplied, so every scenario is a generic self-contained vehicle and every inferred option label and field name is flagged unconfirmed. All stimuli are authored as text so each verdict is provable from visible detail, no images were generated."
+  },
+  "question_bank": [
+    {
+      "id": 1,
+      "skills": ["S1"],
+      "is_trap": false,
+      "scenario": "A labeling rule states: mark a record ELIGIBLE only when all of the following hold. The title field is written in English. The description contains at least 40 words. The contact field is not empty. The record was submitted within the last 30 days. A separate note adds that a description of exactly 40 words still satisfies the length requirement, and that capitalization in the title is never considered. The worker must first identify the conditions that govern the ELIGIBLE label before judging any record.",
+      "fields": [
+        {
+          "name": "governing_condition_count",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["3", "4", "5", "6"],
+          "answer": "4",
+          "reason": "Four independent conditions govern eligibility, the English title, the 40-plus word length, the non-empty contact, and the within-30-days window. The exactly-40 note and the capitalization note are clarifications of existing conditions, not additional conditions."
+        },
+        {
+          "name": "condition_list",
+          "type": "subjective",
+          "unconfirmed": true,
+          "checklist": [
+            "Lists the English title condition",
+            "Lists the at-least-40-words condition",
+            "Lists the non-empty contact condition",
+            "Lists the within-30-days condition",
+            "Treats the exactly-40-words note as a clarification, not a fifth condition",
+            "Treats the capitalization note as an exclusion clarification, not a condition"
+          ],
+          "constraints": "Must separate true governing conditions from clarifying notes, and must not invent conditions the rule does not state.",
+          "pass_condition": "Names all four governing conditions and classifies both notes as clarifications rather than new conditions."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 2,
+      "skills": ["S2"],
+      "is_trap": false,
+      "scenario": "A worker must decide whether two reference strings are identical. Reference A reads INV-2024-0098-RX. Reference B reads INV-2024-0098-RZ.",
+      "fields": [
+        {
+          "name": "identical",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Identical", "Differ"],
+          "answer": "Differ",
+          "reason": "Every character matches except the final one, which is X in A and Z in B, so the strings differ on a single consequential character."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 3,
+      "skills": ["S5"],
+      "is_trap": false,
+      "scenario": "Two records are presented for comparison. Record A lists name Lena Ortiz, role Editor, region North, badge 5512. Record B lists name Lena Ortiz, role Editor, region North, badge 5512, clearance Tier2. The worker reports the relationship between the two records.",
+      "fields": [
+        {
+          "name": "field_relationship",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["B is missing a field present in A", "B adds a field not present in A", "The records conflict on a shared field", "The records are identical"],
+          "answer": "B adds a field not present in A",
+          "reason": "Record B carries an extra clearance field, while name, role, region, and badge match exactly with no conflict and nothing missing from B."
+        },
+        {
+          "name": "difference_summary",
+          "type": "subjective",
+          "unconfirmed": true,
+          "checklist": [
+            "Identifies clearance as the field added in B",
+            "Confirms name, role, region, and badge match",
+            "Reports no conflicting shared field",
+            "Reports no field missing from B"
+          ],
+          "constraints": "Must classify each field as matching, added, missing, or conflicting, and must not label the added field as a conflict.",
+          "pass_condition": "Correctly labels clearance as added in B and confirms the four shared fields match with no conflict."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 4,
+      "skills": ["S4"],
+      "is_trap": true,
+      "scenario": "Two profiles are presented. Profile A lists name James Carter, city Denver, employer Atlas Freight, government ID 884-22. Profile B lists name James Carter, city Denver, employer Atlas Freight, government ID 731-95. The worker must decide whether both profiles describe the same individual. The government ID is the unique identifying field for a person.",
+      "fields": [
+        {
+          "name": "same_individual",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Same individual", "Different individuals", "Cannot be determined"],
+          "answer": "Different individuals",
+          "reason": "The government ID is the identifying field and the two IDs conflict, 884-22 against 731-95. The matching name, city, and employer are incidental signals that surface resemblance, not identity evidence."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 5,
+      "skills": ["S3"],
+      "is_trap": false,
+      "scenario": "A worker is asked whether a partially visible logo belongs to brand Vireo. The visible portion shows only a single curved stroke and one letter that could be read as V or as Y. No other identifying mark is present. The worker chooses a confidence call.",
+      "fields": [
+        {
+          "name": "confidence_call",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Confident match to Vireo", "Confident non-match", "Insufficient evidence to decide"],
+          "answer": "Insufficient evidence to decide",
+          "reason": "A single ambiguous letter and one stroke support neither a confident match nor a confident non-match, the available evidence is too thin to decide."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 6,
+      "skills": ["S6"],
+      "is_trap": false,
+      "scenario": "A worker is asked to verify the signature date on a contract. The provided file is a blank contract template with all fields left empty and no signature block filled in. The worker must decide whether this source can support the requested verification.",
+      "fields": [
+        {
+          "name": "source_usable",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Source is usable for the verification", "Source is unfit for the verification"],
+          "answer": "Source is unfit for the verification",
+          "reason": "A blank template carries no signature date to verify, so the source itself cannot support the judgment regardless of how much effort the worker applies."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 7,
+      "skills": ["S7"],
+      "is_trap": false,
+      "scenario": "A record was labeled DUPLICATE because its order number 7781 and its line item match an earlier record exactly, while only the timestamp differs. The worker must write a one-sentence justification that a reviewer can audit.",
+      "fields": [
+        {
+          "name": "justification",
+          "type": "subjective",
+          "unconfirmed": true,
+          "checklist": [
+            "States the DUPLICATE conclusion",
+            "Cites the matching order number 7781",
+            "Cites the matching line item",
+            "Notes the timestamp as the only difference",
+            "Stays to a single sentence"
+          ],
+          "constraints": "One sentence, concrete evidence named, no vague wording such as looks like or seems.",
+          "pass_condition": "A single clear sentence that states the DUPLICATE conclusion and names the matching order number 7781 and line item as the supporting evidence."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 8,
+      "skills": ["S2"],
+      "is_trap": false,
+      "scenario": "A shipment log lists three crate weights. Crate 1 is 12.50 kg. Crate 2 is 12.05 kg. Crate 3 is 12.50 kg. The worker must report whether all three crates share the same weight.",
+      "fields": [
+        {
+          "name": "all_equal",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["All equal", "Not all equal"],
+          "answer": "Not all equal",
+          "reason": "Crate 2 reads 12.05 kg while crates 1 and 3 read 12.50 kg, the transposed middle digits make crate 2 differ."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 9,
+      "skills": ["S3"],
+      "is_trap": false,
+      "scenario": "A worker compares two captured license plate strings to judge confidence that they match. Both strings are described as fully legible, well lit, and unoccluded. String 1 reads ABC-1234 in full. String 2 reads ABC-1234 in full. The worker chooses a confidence call.",
+      "fields": [
+        {
+          "name": "confidence_call",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Confident match", "Insufficient evidence to decide", "Confident non-match"],
+          "answer": "Confident match",
+          "reason": "Both plate strings are fully legible and identical character for character, the evidence is complete enough to support a confident match rather than hedging."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 10,
+      "skills": ["S6"],
+      "is_trap": false,
+      "scenario": "A worker is asked to judge the color accuracy of a product photo against a reference swatch. The supplied image is described as a grayscale scan with no color channel. The worker must decide whether this source supports a color judgment.",
+      "fields": [
+        {
+          "name": "source_usable",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Source supports the color judgment", "Source is unfit for the color judgment"],
+          "answer": "Source is unfit for the color judgment",
+          "reason": "A grayscale source carries no color information, so it cannot support any color accuracy judgment, the unfitness is in the source itself, not in the difficulty of deciding."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 11,
+      "skills": ["S5"],
+      "is_trap": false,
+      "scenario": "Two product records are presented. Record A lists SKU 4410, price 19.99, color Blue. Record B lists SKU 4410, price 21.99, color Blue. The worker reports the relationship between the two records.",
+      "fields": [
+        {
+          "name": "relationship",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["The records are identical", "B adds a field not in A", "The records conflict on a shared field", "B is missing a field present in A"],
+          "answer": "The records conflict on a shared field",
+          "reason": "Both records share SKU and color but the price field conflicts, 19.99 against 21.99, no field is added and none is missing."
+        },
+        {
+          "name": "difference_summary",
+          "type": "subjective",
+          "unconfirmed": true,
+          "checklist": [
+            "Identifies price as the conflicting field",
+            "Confirms SKU matches",
+            "Confirms color matches",
+            "Reports no added or missing field"
+          ],
+          "constraints": "Must classify each field as matching, added, missing, or conflicting, and must not treat the conflict as an addition.",
+          "pass_condition": "Names price as the conflict and confirms SKU and color match with nothing added or missing."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 12,
+      "skills": ["S4"],
+      "is_trap": false,
+      "scenario": "A worker must decide whether a submitted essay is on-topic for the prompt Explain photosynthesis. The essay is well written, grammatically flawless, and uses advanced vocabulary, but its content describes the water cycle from start to finish. The worker judges topical relevance only.",
+      "fields": [
+        {
+          "name": "on_topic",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["On-topic", "Off-topic"],
+          "answer": "Off-topic",
+          "reason": "Relevance turns on whether the content matches the prompt, the essay covers the water cycle rather than photosynthesis, the polished writing quality is an incidental signal that does not establish topicality."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 13,
+      "skills": ["S7"],
+      "is_trap": false,
+      "scenario": "A worker wrote this justification for a REJECT label: it just seems off and probably wrong. The actual reason on file is that the submission states the applicant age as 17, which fails the stated minimum age of 18. The worker must rewrite the justification as a concrete, auditable statement.",
+      "fields": [
+        {
+          "name": "rewrite",
+          "type": "subjective",
+          "unconfirmed": true,
+          "checklist": [
+            "States the REJECT conclusion",
+            "Cites the stated age 17",
+            "Cites the minimum age 18 requirement",
+            "Removes vague wording such as seems and probably",
+            "Stays to one or two sentences"
+          ],
+          "constraints": "Concrete evidence named, no vague terms, one or two sentences, no hedging.",
+          "pass_condition": "A concise justification that names age 17 against the minimum of 18 as the reason for REJECT and contains no vague filler."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 14,
+      "skills": ["S3"],
+      "is_trap": true,
+      "scenario": "A worker compares two serial numbers to decide confidence in a match. Serial A is fully legible and reads 7K-2200-9. Serial B is partly smudged and reads 7K-22 followed by two unreadable digits and then 9, written as 7K-22??-9. The legible portions of B align with A. The worker chooses a confidence call.",
+      "fields": [
+        {
+          "name": "confidence_call",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Confident match", "Confident non-match", "Insufficient evidence to decide"],
+          "answer": "Insufficient evidence to decide",
+          "reason": "Two middle digits of serial B are unreadable, the visible portions align but cannot confirm the full string, so the evidence is incomplete and a confident match is not supported despite the tempting partial agreement."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 15,
+      "skills": ["S5"],
+      "is_trap": false,
+      "scenario": "Two tag sets are presented. Record A lists tags red, large, cotton. Record B lists tags red, small, cotton, waterproof. The worker reports all correspondences and differences between the two tag sets.",
+      "fields": [
+        {
+          "name": "primary_difference_type",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Only an added tag", "Only a missing tag", "Both a conflicting attribute and an added tag", "The sets are identical"],
+          "answer": "Both a conflicting attribute and an added tag",
+          "reason": "Size conflicts between the sets, large in A against small in B, and waterproof is added in B, while red and cotton match."
+        },
+        {
+          "name": "difference_summary",
+          "type": "subjective",
+          "unconfirmed": true,
+          "checklist": [
+            "Confirms red matches",
+            "Confirms cotton matches",
+            "Marks size as conflicting, large against small",
+            "Marks waterproof as added in B",
+            "Reports nothing missing from A"
+          ],
+          "constraints": "Must classify each tag as matching, added, missing, or conflicting, and must not collapse the size conflict and the added tag into one label.",
+          "pass_condition": "Identifies the size conflict and the added waterproof tag while confirming red and cotton match."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 16,
+      "skills": ["S2"],
+      "is_trap": false,
+      "scenario": "A form requires dates in DD-MM-YYYY format. A worker reviews the entry 13-14-2026 and must decide whether it is validly formatted for that pattern.",
+      "fields": [
+        {
+          "name": "valid_format",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Valid", "Invalid"],
+          "answer": "Invalid",
+          "reason": "Under DD-MM-YYYY the second pair is the month, which reads 14 and is not a valid month, so the entry fails the pattern despite looking date-like at a glance."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 17,
+      "skills": ["S1"],
+      "is_trap": false,
+      "scenario": "An instruction reads: first check whether the file opens. If it does not open, stop and mark UNREADABLE without scoring content. If it opens, then score the content for accuracy. A worker receives a file that fails to open. The worker must decide what the instruction requires.",
+      "fields": [
+        {
+          "name": "required_action",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Mark UNREADABLE and stop", "Score the content for accuracy anyway", "Mark UNREADABLE and also score content"],
+          "answer": "Mark UNREADABLE and stop",
+          "reason": "The instruction gates content scoring behind the file opening, since the file does not open the worker stops at UNREADABLE and does not reach the content scoring step."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 18,
+      "skills": ["S7"],
+      "is_trap": false,
+      "scenario": "A worker found that two invoices match on vendor and amount but differ in invoice number, 5510 against 5511. The worker must write a one-sentence finding that a reviewer can audit.",
+      "fields": [
+        {
+          "name": "finding",
+          "type": "subjective",
+          "unconfirmed": true,
+          "checklist": [
+            "States the near-match relationship and that they differ on invoice number",
+            "Cites vendor as matching",
+            "Cites amount as matching",
+            "Cites invoice numbers 5510 and 5511 as the difference",
+            "Stays to a single sentence"
+          ],
+          "constraints": "One sentence, concrete fields named, no vague wording.",
+          "pass_condition": "A single clear sentence naming vendor and amount as matching and invoice numbers 5510 and 5511 as the difference."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": 19,
+      "skills": ["S4"],
+      "is_trap": true,
+      "scenario": "A worker must decide whether two images show the same physical building, judging from the visible structural evidence described. Image 1 shows a tall glass tower with 30 floors and a rooftop antenna. Image 2 shows a tall glass tower of similar overall shape with 22 floors and no rooftop antenna. The worker decides whether it is the same building.",
+      "fields": [
+        {
+          "name": "same_building",
+          "type": "objective",
+          "unconfirmed": true,
+          "options": ["Same building", "Different buildings", "Cannot be determined"],
+          "answer": "Different buildings",
+          "reason": "The relevant distinguishing evidence conflicts, 30 floors with an antenna against 22 floors with none, the shared glass-tower shape is an incidental resemblance that does not establish identity."
+        }
+      ],
+      "media": []
+    }
+  ],
+  "question_bank_quality": {
+    "total_items": 19,
+    "per_skill": [
+      {"skill": "S1", "name": "Instruction Reading", "weight": 3, "count": 2, "exercised": true, "two_deciding_items": true, "items": [1, 17]},
+      {"skill": "S2", "name": "Attention to Detail", "weight": 4, "count": 3, "exercised": true, "two_deciding_items": true, "items": [2, 8, 16]},
+      {"skill": "S3", "name": "Calibrated Judgment", "weight": 5, "count": 3, "exercised": true, "two_deciding_items": true, "items": [5, 9, 14]},
+      {"skill": "S4", "name": "Objectivity", "weight": 5, "count": 3, "exercised": true, "two_deciding_items": true, "items": [4, 12, 19]},
+      {"skill": "S5", "name": "Difference Detection", "weight": 5, "count": 3, "exercised": true, "two_deciding_items": true, "items": [3, 11, 15]},
+      {"skill": "S6", "name": "Source Validity Judgment", "weight": 3, "count": 2, "exercised": true, "two_deciding_items": true, "items": [6, 10]},
+      {"skill": "S7", "name": "Clear Writing", "weight": 4, "count": 3, "exercised": true, "two_deciding_items": true, "items": [7, 13, 18]}
+    ],
+    "skills_missing": [],
+    "global_checks": {
+      "every_item_unambiguous_and_tagged": true,
+      "no_near_duplicates": true,
+      "varied_input_length": true,
+      "arrangement_honored": true,
+      "house_style_clean": true,
+      "all_option_labels_and_field_names_flagged_unconfirmed": true,
+      "trap_count": 3,
+      "traps_each_target_a_specific_skill": true,
+      "every_option_correct_at_least_once": true,
+      "ids_continuous_1_to_n": true,
+      "no_two_consecutive_items_share_a_probed_skill": true
+    },
+    "stimulus_status": "complete",
+    "flags": [
+      "No SOP and no production task were supplied. Every option label and field name is inferred from the competency and is flagged unconfirmed for later human reconciliation.",
+      "Count auto produced 19 items. The split was weighted by importance, the three weight-5 skills S3, S4, and S5 each receive 3 deciding items, the weight-4 skills S2 and S7 each receive 3, the weight-3 skills S1 and S6 each receive 2 at the coverage floor.",
+      "Arrangement mixed honored. No two consecutive items share a probed skill.",
+      "Three traps, items 4 and 19 target Objectivity S4, item 14 targets Calibrated Judgment S3.",
+      "All stimuli were authored as self-contained text so every verdict is provable from visible detail. No images were generated, so no media entries exist and no image verification is pending.",
+      "S3 versus S6 boundary respected, item 14 is a thin-evidence calibration case where the source type is appropriate but incomplete, items 6 and 10 are source-validity cases where the source type itself cannot support the judgment.",
+      "Every objective option value appears as the correct answer in at least one item across the bank."
+    ],
+    "result": "pass"
+  },
+  "worker_grading_rubric": {
+    "dimensions": [
+      {
+        "skill": "S1",
+        "name": "Instruction decomposition",
+        "correct_call": "Separates the distinct governing conditions from clarifying notes and honors conditional gating before judging content.",
+        "common_mistakes": "Counting a clarification as a separate condition, missing a stated condition, or scoring content when an instruction gate blocks it."
+      },
+      {
+        "skill": "S2",
+        "name": "Detail detection",
+        "correct_call": "Spots the single small feature, a changed character, a transposed digit, or an out-of-range field, that flips the judgment.",
+        "common_mistakes": "Skimming and declaring a match when one character or digit differs, or missing an invalid component that looks plausible."
+      },
+      {
+        "skill": "S3",
+        "name": "Confidence calibration",
+        "correct_call": "Matches confidence to evidence completeness, deciding confidently when evidence is full and choosing insufficient when key detail is unreadable or ambiguous.",
+        "common_mistakes": "Forcing a confident verdict on partial or ambiguous evidence, or hedging to insufficient when the evidence is in fact complete."
+      },
+      {
+        "skill": "S4",
+        "name": "Objectivity and relevant-evidence selection",
+        "correct_call": "Bases the verdict only on the evidence genuinely relevant, an identifying field or distinguishing structural detail, and ignores surface resemblance and quality halos.",
+        "common_mistakes": "Letting matching names, similar shapes, or polished writing drive a verdict that the relevant evidence contradicts."
+      },
+      {
+        "skill": "S5",
+        "name": "Difference classification",
+        "correct_call": "Classifies each element as matching, added, missing, or conflicting, and distinguishes an added field from a conflict on a shared field.",
+        "common_mistakes": "Collapsing distinct difference types, calling an addition a conflict, or overlooking a conflicting shared value."
+      },
+      {
+        "skill": "S6",
+        "name": "Source validity",
+        "correct_call": "Recognizes when the source material itself cannot support the requested judgment, a blank template or a channel-stripped asset, separate from any difficulty in deciding.",
+        "common_mistakes": "Attempting the judgment on an unfit source, or confusing an unfit source with a merely hard but well-formed case."
+      },
+      {
+        "skill": "S7",
+        "name": "Clear writing",
+        "correct_call": "Writes a concise statement that names the conclusion and the specific evidence supporting it, with no vague or hedging wording.",
+        "common_mistakes": "Vague justifications, omitted evidence, or padding that a reviewer cannot audit.",
+        "free_text_rubric": "Score a written deliverable on whether it states the conclusion, cites the exact deciding evidence by value, stays within the stated length, and avoids vague terms. A response that omits the deciding evidence or relies on words such as seems or probably fails regardless of grammar."
+      }
+    ],
+    "overall_pass_threshold": "Overall pass at 75 percent of the weighted item score, with each weight-5 skill, Calibrated Judgment, Objectivity, and Difference Detection, at or above 70 percent and no trap item answered incorrectly."
+  },
+  "skillset": {
+    "skillset_version": "v1-2026-06-15",
+    "note": "Usage map only. It echoes the frozen skills the bank exercises with the items that probe each. It does not edit, rename, merge, or re-group the canonical vocabulary, and there are no proposed additions.",
+    "exercised_skills": [
+      {"id": "S1", "name": "Instruction Reading", "weight": 3, "items": [1, 17]},
+      {"id": "S2", "name": "Attention to Detail", "weight": 4, "items": [2, 8, 16]},
+      {"id": "S3", "name": "Calibrated Judgment", "weight": 5, "items": [5, 9, 14]},
+      {"id": "S4", "name": "Objectivity", "weight": 5, "items": [4, 12, 19]},
+      {"id": "S5", "name": "Difference Detection", "weight": 5, "items": [3, 11, 15]},
+      {"id": "S6", "name": "Source Validity Judgment", "weight": 3, "items": [6, 10]},
+      {"id": "S7", "name": "Clear Writing", "weight": 4, "items": [7, 13, 18]}
+    ]
+  }
+}
